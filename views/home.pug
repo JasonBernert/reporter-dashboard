@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  .cover
+    .container
+      .col-sm-12.text-center
+        h2 You’ve logged #[span.highlighted #{h.addCommas(count)}] snapshots
+        h2 since #[span.highlighted #{h.moment(first.date).format('dddd, MMMM Do YYYY')}] 
+        h2 mostly from #[span.highlighted Portland, OR].

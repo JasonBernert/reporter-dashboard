@@ -1,0 +1,65 @@
+{
+  "name": "reporter-dashboard",
+  "version": "0.0.0",
+  "description": "A dashboard for your Reporter App data",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jasonbernert/reporter-dashboard.git"
+  },
+  "author": "Jason Bernert",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "postinstall": "npm rebuild node-sass",
+    "eslint": "eslint **/*.js"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.15.2",
+    "chalk": "^1.1.3",
+    "cheerio": "^0.22.0",
+    "compression": "^1.6.2",
+    "connect-mongo": "^1.3.2",
+    "dotenv": "^4.0.0",
+    "dropbox": "^2.5.4",
+    "errorhandler": "^1.4.3",
+    "express": "^4.14.0",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.14.2",
+    "express-status-monitor": "^0.1.5",
+    "express-validator": "^3.1.2",
+    "lusca": "^1.4.1",
+    "moment": "^2.18.1",
+    "mongoose": "^4.6.6",
+    "morgan": "^1.7.0",
+    "node-sass-middleware": "^0.11.0",
+    "passport": "0.3.2",
+    "path": "^0.12.7",
+    "pug": "^2.0.0-beta6",
+    "request": "^2.78.0",
+    "validator": "^7.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.1.3",
+    "eslint-plugin-chai-friendly": "^0.2.0",
+    "eslint-plugin-import": "^2.1.0"
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "rules": {
+      "comma-dangle": 0,
+      "consistent-return": 0,
+      "no-param-reassign": 0,
+      "no-underscore-dangle": 0,
+      "no-shadow": 0,
+      "no-console": 0,
+      "no-plusplus": 0,
+      "no-unused-expressions": 0
+    },
+    "env": {
+      "node": true
+    }
+  }
+}
