@@ -69,7 +69,7 @@ async function findNewestSnapshot() {
       .find()
       .sort({ date: -1 })
       .limit(1);
-
+    // TODO: If there are no documents in the DB, default to oldest possible date.
     const mostRecent = mostRecentSnap[0].date.toISOString().split('T')[0];
     console.log(`The latest snapshot in your database is from ${mostRecent}`);
     return mostRecent;
