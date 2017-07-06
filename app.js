@@ -106,8 +106,11 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 /* Primary app routes. */
 app.get('/', homeController.index);
 app.get('/api/:limit', homeController.test);
-app.get('/api/awakeSnaps', homeController.getAwakeSnaps);
-app.get('/test', homeController.getAwakeSnaps);
+// app.get('/test', homeController.getAwakeSnaps);
+// app.get('/people', homeController.getPeople);
+app.get('/recent', homeController.recent);
+app.get('/recent/page/:page', homeController.recent);
+app.get('/snapshot/:id', homeController.snapshotDetails);
 
 /* Error Handler */
 app.use(errorHandler());

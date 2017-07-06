@@ -43,15 +43,16 @@ nav {
   }
 
   li {
-    padding: 0 0.75em;
+    padding: 0 1.5em;
     min-width: 80px;
     text-align: center;
   }
 
   li:first-child {
-    font-size: 1.25em;
+    font-size: 1.5em;
     flex-grow: 1;
     text-align: left;
+    font-weight: 400;
   }
 
   a {

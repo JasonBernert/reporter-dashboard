@@ -96,8 +96,13 @@ const snapshotSchema = new mongoose.Schema({
   }
 });
 
-snapshotSchema.statics.getMetadata = function () {
-  return this.aggregate([{ $count: 'totalSnaps' }]);
+snapshotSchema.statics.countOccurrences = function (q) {
+  return this.aggregate([
+    // { $match: '$tags' },
+    // { $unwind: '$tags' },
+    { $group: { _id: `$${q}`, count: { $sum: 1 } } },
+    { $sort: { count: -1 } }
+  ]);
 };
 
 const Snapshot = mongoose.model('Snapshot', snapshotSchema);

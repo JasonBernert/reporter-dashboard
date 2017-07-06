@@ -1,0 +1,10 @@
+mixin snapSummary(snapshot)
+  a.snapSummary(href=`/snapshot/${snapshot._id}`)
+    .preview
+      p= snapshot.date
+      p= snapshot.location.placemark.name
+      p= snapshot.weather.weather
+
+    //- each response in snapshot.responses
+    //-   pre= h.dump(response.questionPrompt)
+    //-  at #{snapshot.locationResponse.text} with #{snapshot.responses[0].tokens.text}

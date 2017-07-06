@@ -1,0 +1,13 @@
+extends layout
+
+include partials/_snapSummary
+include partials/_pagination
+
+block content
+  .cover
+    .container
+      .col-sm-12.col-md-8
+        h2=title
+        each snapshot in snapshots
+          +snapSummary(snapshot)
+  +pagination(page, pages, count)
