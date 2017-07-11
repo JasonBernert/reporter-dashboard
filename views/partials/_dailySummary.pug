@@ -1,0 +1,24 @@
+mixin dailySummary(snapshots)
+  each snapshot, index in snapshots
+    -var summary = '';
+    each response in snapshot.responses
+      if response.tokens
+        each token in response.tokens
+          -summary += token.text
+      else if response.answeredOptions
+        -summary += response.answeredOptions
+      else if response.locationResponse
+        -summary += `You were at ${response.locationResponse.text}. `
+    a(href=`/snapshot/${snapshot._id}`)
+      if index === 0 
+        .card.morning 
+          h4 #{h.moment(snapshot.date).format('h:mm a')}
+          p= summary
+      else if index === snapshots.length-1
+        .card.evening
+          h4 #{h.moment(snapshot.date).format('h:mm a')}
+          p= summary
+      else 
+        .card
+          h4 #{h.moment(snapshot.date).format('h:mm a')}
+          p= summary

@@ -1,13 +1,18 @@
 extends layout
 
-include partials/_snapSummary
+include partials/_dailySummary
 include partials/_pagination
 
 block content
   .cover
     .container
-      .col-sm-12.col-md-8
-        h2=title
-        each snapshot in snapshots
-          +snapSummary(snapshot)
+      h2=title
+  .container
+    .col-sm-12.col-md-8
+      each day in weeklySummary
+        .cardContainer
+          h1 #{h.moment(day._id.substring(2)).format('dddd')}
+          p #{h.moment(day._id.substring(2)).format('MMMM Do')}
+          +dailySummary(day.snapshots)
   +pagination(page, pages, count)
+  pre= h.dump(weeklySummary)

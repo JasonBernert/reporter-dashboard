@@ -28,12 +28,13 @@ body {
 }
 
 nav {
-  position: absolute;
+  // position: absolute;
   top: 0;
   padding: 12px;
   width: 100%;
   color: $white;
   font-weight: 300;
+  background-color: #444;
 
   ul {
     width: 100%;
@@ -118,6 +119,94 @@ footer {
     font-family: $font-monospace;
     color: $white;
     padding: 0.125em 0.3em;
+  }
+}
+
+.cardContainer{
+  padding: 20px 30px;
+  margin: 40px 0;
+  border-right: 0px solid;
+  border-left: 2px solid rgb(240,166,87);
+  -webkit-border-image: -webkit-linear-gradient(rgb(240,166,87), rgb(71,164,180), rgb(141,127,185)) 1 100%;
+
+  h1 {
+    color: #414243;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+  }
+
+  h4 {
+    color: #313233;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    line-height: 2em;
+    font-weight: 500;
+  }
+
+  p {
+    font-weight: 300;
+    color: #515253;
+    line-height: 1.5em;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+  }
+
+  a {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  a:visited {
+    color: #333;
+    text-decoration: none;
+  }
+
+  .card {
+    transition: all ease 0.12s;
+    padding: 12px 16px;
+    border: 1px solid #F1F2F3;
+    border-radius: 4px;
+    margin: 20px 0px 0px 0px;
+    background-color: #fff;
+  }
+
+  .card:hover {
+    border: 1px solid #E1E2E3;
+    box-shadow: 0px 2px 6px #f1f2f3;
+  }
+
+  .card:before {
+    position: absolute;
+    content: '';
+    width: 16px;
+    height: 16px;
+    margin: 7px -56px;
+    background-color: white;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: all ease 0.2s;
+    border: 3px solid rgb(71,164,180);
+  }
+
+  .card:hover:before {
+    border: 8px solid rgb(71,164,180);
+  }
+
+  .morning:before {
+    border: 3px solid rgb(240,166,87);
+  }
+
+  .morning:hover:before {
+    border: 8px solid rgb(240,166,87);
+  }
+
+  .evening:before {
+    border: 3px solid rgb(141,127,185);
+  }
+
+  .evening:hover:before {
+    border: 8px solid rgb(141,127,185);
   }
 
 }

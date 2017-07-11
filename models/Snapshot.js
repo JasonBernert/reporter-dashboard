@@ -105,6 +105,17 @@ snapshotSchema.statics.countOccurrences = function (q) {
   ]);
 };
 
+snapshotSchema.statics.dailySummary = function () {
+  return this.aggregate([
+    { $sort: { date: 1 } },
+    { $group: {
+      _id: '$sectionIdentifier',
+      count: { $sum: 1 },
+      snapshots: { $push: { _id: '$_id', date: '$date', responses: '$responses' } }
+    } },
+  ]);
+};
+
 const Snapshot = mongoose.model('Snapshot', snapshotSchema);
 
 module.exports = Snapshot;
