@@ -31,22 +31,20 @@ exports.recent = async (req, res) => {
   const limit = 7;
   const skip = (page * limit) - limit;
 
-  // const d = { sectionIdentifier: '1-2017-7-3' };
-  //
   const weeklySummaryPromise = Snapshot
     .dailySummary()
     .skip(skip)
     .limit(limit)
     .sort({ date: 1 });
 
-  const countPromise = Snapshot.count();
+  const countPromise = Snapshot.dailySummary();
 
   const [weeklySummary, count] = await Promise.all([weeklySummaryPromise, countPromise]);
 
-  const pages = Math.ceil(count / limit);
+  const pages = Math.ceil(count.length / limit);
   if (!weeklySummary.length && skip) {
     req.flash('info', 'Page does not exist!');
-    res.redirect(`/stores/page/${pages}`);
+    res.redirect('/recent');
     return;
   }
 

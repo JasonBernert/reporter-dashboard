@@ -8,11 +8,11 @@ block content
     .container
       h2=title
   .container
-    .col-sm-12.col-md-8
+    .col-sm-12.col-md-8.col-md-offset-2
       each day in weeklySummary
         .cardContainer
           h1 #{h.moment(day._id.substring(2)).format('dddd')}
           p #{h.moment(day._id.substring(2)).format('MMMM Do')}
           +dailySummary(day.snapshots)
   +pagination(page, pages, count)
-  pre= h.dump(weeklySummary)
+  //- pre= h.dump(weeklySummary)
