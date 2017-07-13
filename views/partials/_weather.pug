@@ -14,14 +14,17 @@ mixin weather(weather)
       table.table
         tr
           td Precipitation
-          td.text-right #{weather.precipTodayIn} inches
+          td.text-right #{weather.precipTodayIn}”
         tr
           td Humidity
           td.text-right #{weather.relativeHumidity}
         tr
           td Wind Direction
-          td.text-right #{weather.windDirection}
-            i.wi.wi-wind(class=`wi-towards-${weather.windDirection.toLowerCase()}`)
+          td.text-right #{weather.windDirection} 
+            if (['North', 'South', 'East', 'West'].indexOf(weather.windDirection) >= 0)
+              i.wi.wi-wind(class=`wi-from-${weather.windDirection.charAt(0).toLowerCase()}`)
+            else
+              i.wi.wi-wind(class=`wi-from-${weather.windDirection.toLowerCase()}`)
         tr
           td Wind speed
           td.text-right #{weather.windMPH} mp/h
