@@ -2,13 +2,29 @@ mixin dailySummary(snapshots)
   each snapshot, index in snapshots
     -var summary = '';
     each response in snapshot.responses
-      if response.tokens
+      if response.questionPrompt === 'How did you sleep?'
+        -summary += `You slept ${response.answeredOptions}. `
+      if response.questionPrompt === 'Do you remember your dreams?'
+        if response.answeredOptions === 'No'
+          -summary += `You couldn’t remembered your dreams. `
+        else
+          -summary += `You remembered your dreams. `
+      if response.questionPrompt === 'Did you snooze?'
+        if response.answeredOptions === 'No'
+          -summary += `You got up right away. `
+        else
+          -summary += `You snoozed. `
+      if response.questionPrompt === 'Who are you with?'
+        -var peopleArray = [];
         each token in response.tokens
-          -summary += token.text
-      else if response.answeredOptions
-        -summary += response.answeredOptions
-      else if response.locationResponse
-        -summary += `You were at ${response.locationResponse.text}. `
+          -peopleArray.push(token.text);
+        -summary += `You were with ${peopleArray}.`
+      if response.questionPrompt === 'Where are you?'
+        if response.locationResponse
+          -summary += `You were at ${response.locationResponse.text}. `
+      if response.questionPrompt === 'How many coffees did you have today?'
+        -summary += `You had ${response.numericResponse} coffees today. `
+
     a(href=`/snapshot/${snapshot._id}`)
       if index === 0 
         .card.morning 

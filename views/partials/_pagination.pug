@@ -3,7 +3,6 @@ mixin pagination(page, pages, count)
     if page > 1
       a.pagination__prev(href=`/recent/page/${parseFloat(page) - 1}`) Prev
     .pagination__text
-      p Week #{page} of #{pages} weeks
-      //- - #{count} total results
+      p Week #{page} of #{pages}
     if page < pages
       a.pagination__next(href=`/recent/page/${parseFloat(page) + 1}`) Next

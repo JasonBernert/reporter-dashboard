@@ -15,6 +15,9 @@ $blue-gray: #D8E1E6;
 $off-white: #f1f2f3;
 $light-gray: #DFE3E7;
 $dark-gray: #282E37;
+$gradient-morning: #C64188;
+$gradient-day: #108CC8;
+$gradient-evening: #843ddd;
 
 html {
   position: relative;
@@ -28,13 +31,13 @@ body {
 }
 
 nav {
-  // position: absolute;
+  position: absolute;
   top: 0;
   padding: 12px;
   width: 100%;
   color: $white;
   font-weight: 300;
-  background-color: #444;
+  // background-color: $dark-gray;
 
   ul {
     width: 100%;
@@ -102,14 +105,18 @@ footer {
   letter-spacing: 0.2em;
 }
 
+.thinner {
+  font-weight: 300;
+}
+
 .cover {
-  @include background( rgba(88,75,161,1), rgba(198,65,136,1) );
+  @include background( $gradient-evening, $gradient-morning );
   padding: 200px 0px;
   color: white;
 
-  h2 {
+  h2,h3 {
     font-weight: 300;
-    line-height: 1.125em;
+    line-height: 1.25em;
   }
 
   .highlighted {
@@ -120,12 +127,14 @@ footer {
   }
 }
 
+//  RECENT PAGE STYLES
+
 .cardContainer{
   padding: 20px 30px;
   margin: 40px 0;
   border-right: 0px solid;
   border-left: 2px solid rgb(240,166,87);
-  -webkit-border-image: -webkit-linear-gradient(rgb(240,166,87), rgb(71,164,180), rgb(141,127,185)) 1 100%;
+  -webkit-border-image: -webkit-linear-gradient($gradient-morning, $gradient-day, $gradient-evening) 1 100%;
 
   h1 {
     color: #414243;
@@ -184,27 +193,27 @@ footer {
     border-radius: 8px;
     box-sizing: border-box;
     transition: all ease 0.2s;
-    border: 3px solid rgb(71,164,180);
+    border: 3px solid $gradient-day;
   }
 
   .card:hover:before {
-    border: 8px solid rgb(71,164,180);
+    border: 8px solid $gradient-day;
   }
 
   .morning:before {
-    border: 3px solid rgb(240,166,87);
+    border: 3px solid $gradient-morning;
   }
 
   .morning:hover:before {
-    border: 8px solid rgb(240,166,87);
+    border: 8px solid $gradient-morning;
   }
 
   .evening:before {
-    border: 3px solid rgb(141,127,185);
+    border: 3px solid $gradient-evening;
   }
 
   .evening:hover:before {
-    border: 8px solid rgb(141,127,185);
+    border: 8px solid $gradient-evening;
   }
 }
 
@@ -226,19 +235,38 @@ footer {
     color: #fff;
     background-color: #515253;
   }
-
 }
 
-// .pagination__prev {
-//
-// }
-//
-// .pagination__text {
-//   color: #515253;
-// }
-//
-// .pagination__next {
-//   margin-left: 1.5em;
-//   padding: 0.25em 0.5em;
-//   border: 1px solid #333;
-// }
+// SNAPSHOT PAGE STYLES
+
+.dataCard {
+  margin: 20px 0;
+  background-color: white;
+  border: 1px solid #E1E2E3;
+  border-radius: 4px;
+
+  h1, h2, h3, h4, h5, h6, p {
+    -webkit-margin-before: 0.125em;
+    -webkit-margin-after: 0em;
+  }
+
+  .wi-wind {
+    font-size: 1.25em;
+  }
+
+  .dataBody {
+    padding: 18px 16px 0px 16px;
+  }
+
+  .dataHeader {
+    color: white;
+    background: linear-gradient(120deg, rgb(16, 140, 200) 0%, rgb(14, 113, 200) 100%);
+    padding: 22px;
+    border-radius: 4px 4px 0px 0px;
+  }
+
+  table {
+    border-bottom: 1px solid #E1E2E3;
+  }
+
+}

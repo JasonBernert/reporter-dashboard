@@ -93,6 +93,38 @@ const snapshotSchema = new mongoose.Schema({
     windGustMPH: Number,
     windKPH: Number,
     windMPH: Number
+  },
+  photoSet: {
+    photos: [{
+      sensingMode: Number,
+      depth: Number,
+      longitudeRef: String,
+      software: String,
+      pixelHeight: Number,
+      apertureValue: Number,
+      meteringMode: Number,
+      sceneCaptureType: Number,
+      uniqueIdentifier: String,
+      isoSpeed: Number,
+      latitude: Number,
+      dateTime: Date,
+      make: String,
+      exposureMode: Number,
+      pixelWidth: Number,
+      orientation: Number,
+      longitude: Number,
+      fNumber: Number,
+      assetUrl: String,
+      exposureProgram: Number,
+      exposureTime: Number,
+      model: String,
+      whiteBalance: Number,
+      focalLength: Number,
+      flash: Number,
+      resolutionUnit: Number,
+      latitudeRef: String
+    }],
+    uniqueIdentifier: String
   }
 });
 
@@ -106,6 +138,11 @@ snapshotSchema.statics.countOccurrences = function (q) {
 };
 
 snapshotSchema.statics.dailySummary = function () {
+  // TODO: Maybe this would work better?
+  // Sort reports by $sectionIdentifier desc.
+  // Find $sectionIdentifier of date where reportImpetus === 5, aka waking up.
+  // Then find the next report where reportImpetus === 4, aka sleeping.
+  // Then return those reports and reports in bewteen.
   return this.aggregate([
     { $sort: { date: 1 } },
     { $group: {

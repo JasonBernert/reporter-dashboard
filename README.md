@@ -48,3 +48,4 @@ There is a script called `load-data.js` that loads existing data into the databa
 
 ## Other
 This project is used [hackathon-starter](https://github.com/sahat/hackathon-starter), a boilerplate for Node.js web applications.
+[The Weather Icons project](https://erikflowers.github.io/weather-icons/) created by Erik Flowers. v1.0 artwork by Lukas Bischoff. v1.1 - 2.0 artwork by Erik Flowers.

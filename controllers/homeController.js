@@ -40,6 +40,8 @@ exports.recent = async (req, res) => {
   const countPromise = Snapshot.dailySummary();
 
   const [weeklySummary, count] = await Promise.all([weeklySummaryPromise, countPromise]);
+  const weekCount = count.length;
+  const snapsCount = weeklySummary.reduce((sum, week) => sum + week.count, 0);
 
   const pages = Math.ceil(count.length / limit);
   if (!weeklySummary.length && skip) {
@@ -53,7 +55,8 @@ exports.recent = async (req, res) => {
     weeklySummary,
     page,
     pages,
-    count
+    weekCount,
+    snapsCount
   });
 };
 
@@ -87,5 +90,8 @@ exports.snapshotDetails = async (req, res) => {
   const _id = req.params.id;
   const q = { _id };
   const snapshot = await Snapshot.find(q);
-  res.json(snapshot);
+  res.render('snapshot', {
+    title: 'Snapshot Summary',
+    snapshot
+  });
 };

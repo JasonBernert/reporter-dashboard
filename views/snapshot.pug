@@ -1,0 +1,33 @@
+extends layout
+
+//- include partials/_summary
+include partials/_weather
+//- include partials/_location
+//- include partials/_audio
+//- include partials/_altitude
+//- include partials/_responses
+
+block content
+  .cover 
+    .container
+      .row
+        .col-sm-6.col-sm-offset-3.text-center
+          h2 #[span.highlighted #{h.moment(snapshot[0].date).format('h:mm A')}]
+          h2 #[span.highlighted #{h.moment(snapshot[0].date).format('dddd, MMMM Do YYYY')}]
+          - const impetuses = ['Report button tapped','Report button tapped while asleep', 'Report triggered by notification', 'Report triggered by setting app to sleep', 'Report triggered by waking up']
+          - const connectionTypes = ['Device was connected via cellular network', 'Device was connected via WiFi', 'Device was not connected']
+          h3.thinner #{impetuses[snapshot[0].reportImpetus]}. Battery was at #{Math.round(snapshot[0].battery*100)} percent. Since last report, you took  #{h.addCommas(snapshot[0].steps)} steps. #{connectionTypes[snapshot[0].connection]}.
+          
+  .container
+    .row
+      .col-sm-12
+
+    .row
+      .col-sm-6
+        +weather(snapshot[0].weather)
+    pre= h.dump(snapshot[0].location)
+    pre= h.dump(snapshot[0].audio)
+    pre= h.dump(snapshot[0].altitude)
+    pre= h.dump(snapshot[0].responses)
+    if snapshot[0].photoSet
+      pre= h.dump(snapshot[0].photoSet)

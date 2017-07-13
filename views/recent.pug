@@ -5,8 +5,10 @@ include partials/_pagination
 
 block content
   .cover
-    .container
-      h2=title
+    .container.text-center
+      .col-sm-12.col-md-8.col-md-offset-2
+        h2 The week of #[span.highlighted #{h.moment(weeklySummary[6]._id.substring(2)).format('MMMM Do, YYYY')}]
+        h2 you logged #[span.highlighted #{h.addCommas(snapsCount)}] snapshots.
   .container
     .col-sm-12.col-md-8.col-md-offset-2
       each day in weeklySummary
@@ -15,4 +17,4 @@ block content
           p #{h.moment(day._id.substring(2)).format('MMMM Do')}
           +dailySummary(day.snapshots)
   +pagination(page, pages, count)
-  //- pre= h.dump(weeklySummary)
+  pre= h.dump(weeklySummary)
