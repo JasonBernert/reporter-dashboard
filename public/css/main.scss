@@ -109,6 +109,13 @@ footer {
   font-weight: 300;
 }
 
+.superscript {
+  text-transform: uppercase;
+  font-size:0.5em;
+  top: -0.7em;
+  font-weight: 700;
+}
+
 .cover {
   @include background( $gradient-evening, $gradient-morning );
   padding: 200px 0px;
@@ -129,9 +136,16 @@ footer {
 
 //  RECENT PAGE STYLES
 
+.dailyHeader {
+  max-width: 30em;
+  margin-left: -20px;
+  padding: 0.75em 2em 1.25em 2em;
+  border: 4px solid rgb(71,164,180);
+  border-image: linear-gradient( $gradient-evening, $gradient-morning ) 1;
+}
+
 .cardContainer{
-  padding: 20px 30px;
-  margin: 40px 0;
+  padding: 10px 30px 60px 30px;
   border-right: 0px solid;
   border-left: 2px solid rgb(240,166,87);
   -webkit-border-image: -webkit-linear-gradient($gradient-morning, $gradient-day, $gradient-evening) 1 100%;
@@ -215,6 +229,10 @@ footer {
   .evening:hover:before {
     border: 8px solid $gradient-evening;
   }
+}
+
+.dailyHeader:first-child {
+  margin-top: 40px;
 }
 
 .pagination {

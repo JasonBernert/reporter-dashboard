@@ -34,8 +34,7 @@ exports.recent = async (req, res) => {
   const weeklySummaryPromise = Snapshot
     .dailySummary()
     .skip(skip)
-    .limit(limit)
-    .sort({ date: 1 });
+    .limit(limit);
 
   const countPromise = Snapshot.dailySummary();
 
@@ -49,6 +48,8 @@ exports.recent = async (req, res) => {
     res.redirect('/recent');
     return;
   }
+
+  // res.json(weeklySummary);
 
   res.render('recent', {
     title: 'Recent Snapshots',
