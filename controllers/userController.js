@@ -1,6 +1,3 @@
-// const bluebird = require('bluebird');
-// const crypto = bluebird.promisifyAll(require('crypto'));
-// const nodemailer = require('nodemailer');
 const passport = require('passport');
 const User = require('../models/User');
 
@@ -52,9 +49,9 @@ exports.logout = (req, res) => {
  * Signup page.
  */
 exports.getSignup = (req, res) => {
-  if (req.user) {
-    return res.redirect('/');
-  }
+  // if (req.user) {
+  //   return res.redirect('/');
+  // }
   res.render('signup', {
     title: 'Create Account'
   });

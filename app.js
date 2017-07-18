@@ -41,7 +41,8 @@ require('./models/User');
 
 /* Controllers (route handlers).*/
 const homeController = require('./controllers/homeController');
-const userController = require('./controllers/user');
+const userController = require('./controllers/userController');
+const apiController = require('./controllers/apiController');
 
 /* Express configuration. */
 app.set('port', process.env.PORT || 3000);
@@ -109,15 +110,15 @@ app.get('/recent', passportConfig.isAuthenticated, homeController.recent);
 app.get('/recent/page/:page', passportConfig.isAuthenticated, homeController.recent);
 app.get('/snapshot/:id', passportConfig.isAuthenticated, homeController.snapshotDetails);
 
-app.get('/api/:limit', homeController.test);
-// app.get('/test', homeController.getAwakeSnaps);
-// app.get('/people', homeController.getPeople);
+app.get('/api/v1/past/:limit', apiController.getLastFew);
+app.get('/api/v1/people', apiController.getPeoples);
+app.get('/api/v1/steps', apiController.steps);
 
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
 app.get('/signup', passportConfig.isAuthenticated, userController.getSignup);
-app.post('/signup', passportConfig.isAuthenticated, userController.postSignup);
+app.post('/signup', userController.postSignup);
 
 /* Error Handler */
 app.use(errorHandler());

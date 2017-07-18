@@ -57,32 +57,6 @@ exports.recent = async (req, res) => {
   });
 };
 
-exports.test = async (req, res) => {
-  const limit = parseFloat(req.params.limit);
-
-  const snapshots = await Snapshot
-    .find()
-    .limit(limit);
-  res.json(snapshots);
-};
-
-exports.getAwakeSnaps = async (req, res) => {
-  const q = { 'responses.questionPrompt': 'How did you sleep?' };
-
-  const awakeSnaps = await Snapshot
-    .find(q)
-    .sort({ date: -1 })
-    .limit(10);
-
-  res.json(awakeSnaps);
-};
-
-// exports.getPeople = async (req, res) => {
-//   const q = { 'responses.questionPrompt': 'Who are you with?' };
-//   const peopleSummary = await Snapshot.countOccurrences('responses');
-//   res.json(peopleSummary);
-// };
-
 exports.snapshotDetails = async (req, res) => {
   const _id = req.params.id;
   const q = { _id };
