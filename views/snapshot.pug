@@ -2,7 +2,7 @@ extends layout
 
 //- include partials/_summary
 include partials/_weather
-//- include partials/_location
+include partials/_location
 //- include partials/_audio
 //- include partials/_altitude
 //- include partials/_responses
@@ -25,9 +25,11 @@ block content
     .row
       .col-sm-6
         +weather(snapshot[0].weather)
-    pre= h.dump(snapshot[0].location)
+      .col-sm-6
+        - const question = snapshot[0].responses.find(x => x.questionPrompt === 'Where are you?')
+        +location(snapshot[0].location, question)
     pre= h.dump(snapshot[0].audio)
     pre= h.dump(snapshot[0].altitude)
     pre= h.dump(snapshot[0].responses)
-    if snapshot[0].photoSet
+    if snapshot[0].photoSet.photos.length > 0
       pre= h.dump(snapshot[0].photoSet)

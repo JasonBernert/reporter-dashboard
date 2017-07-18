@@ -273,7 +273,7 @@ footer {
   }
 
   .dataBody {
-    padding: 18px 16px 0px 16px;
+    padding: 18px 16px 16px 16px;
   }
 
   .dataHeader {
@@ -285,6 +285,15 @@ footer {
 
   table {
     border-bottom: 1px solid #E1E2E3;
+    margin-bottom: 0px;
   }
 
+  svg {
+    height: 16px;
+  }
+}
+
+// LEAFLET STYLE
+#map {
+  height: 280px;
 }

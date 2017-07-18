@@ -37,11 +37,8 @@ exports.recent = async (req, res) => {
     .limit(limit);
 
   const countPromise = Snapshot.dailySummary();
-
   const [weeklySummary, count] = await Promise.all([weeklySummaryPromise, countPromise]);
-  const weekCount = count.length;
   const snapsCount = weeklySummary.reduce((sum, week) => sum + week.count, 0);
-
   const pages = Math.ceil(count.length / limit);
   if (!weeklySummary.length && skip) {
     req.flash('info', 'Page does not exist!');
@@ -56,7 +53,6 @@ exports.recent = async (req, res) => {
     weeklySummary,
     page,
     pages,
-    weekCount,
     snapsCount
   });
 };

@@ -149,20 +149,15 @@ snapshotSchema.statics.dailySummary = function () {
   return this.aggregate([
     { $group: {
       _id: { year: { $year: '$date' }, month: { $month: '$date' }, day: { $dayOfMonth: '$date' } },
+      count: { $sum: 1 },
       snapshots: { $push: { _id: '$_id', date: '$date', responses: '$responses' } }
     } },
-    { $unwind: '$snapshots' },
-    { $sort: { 'snapshots.date': 1 } },
-    { $group: { _id: '$_id', count: { $sum: 1 }, snapshots: { $push: '$snapshots' } } },
     { $project: {
-      year: '$_id.year',
-      month: '$_id.month',
-      day: '$_id.day',
       snapshots: '$snapshots',
       count: 1,
-      _id: 0
+      _id: 1
     } },
-    { $sort: { year: -1, month: -1, day: -1 } }
+    { $sort: { '_id.year': -1, '_id.month': -1, '_id.day': -1 } }
   ]);
 };
 

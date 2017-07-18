@@ -1,8 +1,12 @@
+const fs = require('fs');
+
 exports.moment = require('moment');
 
 exports.dump = obj => JSON.stringify(obj, null, 2);
 
 exports.addCommas = x => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+exports.icon = name => fs.readFileSync(`./public/icons/${name}.svg`);
 
 exports.weatherIcons = {
   Overcast: 'wi-cloudy',
