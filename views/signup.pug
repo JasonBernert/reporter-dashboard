@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='csrf-token', content=_csrf)
+    title #{title}
+    link(rel='shortcut icon', href='/favicon.png')
+    link(rel='stylesheet', href='/css/main.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:300,400')
+
+  body
+
+  .container
+    include partials/flash
+
+  block content
+    .page-header
+      h3 Sign up
+    form.form-horizontal(id='signup-form', method='POST')
+      input(type='hidden', name='_csrf', value=_csrf)
+      .form-group
+        label.col-sm-3.control-label(for='email') Email
+        .col-sm-7
+          input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
+      .form-group
+        label.col-sm-3.control-label(for='password') Password
+        .col-sm-7
+          input.form-control(type='password', name='password', id='password', placeholder='Password', required)
+      .form-group
+        label.col-sm-3.control-label(for='confirmPassword') Confirm Password
+        .col-sm-7
+          input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
+      .form-group
+        .col-sm-offset-3.col-sm-7
+          button.btn.btn-success(type='submit')
+            i.fa.fa-user-plus
+            | Signup
+
+
+    script(src='/js/lib/jquery-3.1.1.min.js')
+    script(src='/js/lib/bootstrap.min.js')
+    script(src='/js/main.js')

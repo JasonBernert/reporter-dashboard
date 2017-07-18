@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
-  password: String
-});
+  password: String,
+  passwordResetToken: String,
+  passwordResetExpires: Date
+}, { timestamps: true });
 
-/**
- * Password hash middleware.
- */
+/* Password hash middleware. */
 userSchema.pre('save', function save(next) {
   const user = this;
   if (!user.isModified('password')) { return next(); }
@@ -22,9 +22,7 @@ userSchema.pre('save', function save(next) {
   });
 });
 
-/**
- * Helper method for validating user's password.
- */
+/* Helper method for validating user's password. */
 userSchema.methods.comparePassword = function comparePassword(candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     cb(err, isMatch);
