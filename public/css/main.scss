@@ -53,10 +53,14 @@ nav {
   }
 
   li:first-child {
-    font-size: 1.5em;
+    font-size: 1.33em;
     flex-grow: 1;
     text-align: left;
-    font-weight: 400;
+    font-weight: 300;
+
+    a:before {
+      content: none;
+    }
   }
 
   a {
@@ -82,6 +86,8 @@ nav {
     transition: all 0.2s ease-in-out 0s;
   }
 
+
+
   a:hover {
     color: $white;
     text-decoration:none;
@@ -103,6 +109,14 @@ footer {
 .caps {
   text-transform: uppercase;
   letter-spacing: 0.2em;
+}
+
+.full-gradient-background {
+  width: 100%;
+  height: 100vh;
+  @include background( $gradient-evening, $gradient-morning );
+  margin: 0px;
+  color: white;
 }
 
 .thinner {
@@ -131,6 +145,48 @@ footer {
     font-family: $font-monospace;
     color: $white;
     padding: 0.125em 0.3em;
+  }
+}
+
+// login form
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+
+  .login-form {
+    width: 320px;
+    height: auto;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .lock-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    border: 3px solid white;
+    border-radius: 50px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  svg {
+    height: 32px;
+    fill: white;
+  }
+
+  form {
+    width: 100%;
   }
 }
 
