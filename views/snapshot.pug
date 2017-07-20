@@ -1,35 +1,37 @@
 extends layout
 
-//- include partials/_summary
-include partials/_weather
-include partials/_location
-//- include partials/_audio
-//- include partials/_altitude
-//- include partials/_responses
+include partials/cards/_weatherCard
+include partials/cards/_locationCard
+include partials/cards/_questionsCard
+include partials/cards/_phoneCard
+include partials/cards/_stepsCard
+include partials/cards/_photosCard
 
 block content
-  .cover 
+  .cover
     .container
       .row
         .col-sm-6.col-sm-offset-3.text-center
           h2 #[span.highlighted #{h.moment(snapshot[0].date).format('h:mm A')}]
           h2 #[span.highlighted #{h.moment(snapshot[0].date).format('dddd, MMMM Do YYYY')}]
-          - const impetuses = ['Report button tapped','Report button tapped while asleep', 'Report triggered by notification', 'Report triggered by setting app to sleep', 'Report triggered by waking up']
-          - const connectionTypes = ['Device was connected via cellular network', 'Device was connected via WiFi', 'Device was not connected']
-          h3.thinner #{impetuses[snapshot[0].reportImpetus]}. Battery was at #{Math.round(snapshot[0].battery*100)} percent. Since last report, you took  #{h.addCommas(snapshot[0].steps)} steps. #{connectionTypes[snapshot[0].connection]}.
-          
-  .container
-    .row
-      .col-sm-12
+          h2 #[span.highlighted #{snapshot[0].location.placemark.locality},#{snapshot[0].location.placemark.administrativeArea}]
 
-    .row
-      .col-sm-6
-        +weather(snapshot[0].weather)
-      .col-sm-6
-        - const question = snapshot[0].responses.find(x => x.questionPrompt === 'Where are you?')
-        +location(snapshot[0].location, question)
-    pre= h.dump(snapshot[0].audio)
-    pre= h.dump(snapshot[0].altitude)
-    pre= h.dump(snapshot[0].responses)
-    if snapshot[0].photoSet.photos.length > 0
-      pre= h.dump(snapshot[0].photoSet)
+  .light-gray-background
+    .container
+      .row
+        .col-sm-4
+          +phoneCard(snapshot[0])
+        .col-sm-4
+          +weather(snapshot[0].weather)
+        .col-sm-4
+          - const question = snapshot[0].responses.find(x => x.questionPrompt === 'Where are you?')
+          +location(snapshot[0].location, question, snapshot[0].altitude)
+      .row
+        .col-sm-8
+          +questionCard(snapshot[0].responses)
+        .col-sm-4
+          +stepsCard(snapshot[0].steps)
+          if snapshot[0].photoSet.photos.length > 0
+            +photosCard(snapshot[0].photoSet)
+
+  //- pre= h.dump(snapshot[0].photoSet)

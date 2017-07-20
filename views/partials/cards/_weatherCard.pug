@@ -1,0 +1,42 @@
+mixin weather(weather)
+  .dataCard
+    .dataHeader
+      .row
+        .col-xs-6
+          h2.thinner #{weather.tempF}° 
+        .col-xs-6.text-right
+          h3
+            i.wi.wi-day-sunny(title=weather.weather)
+    .dataBody
+      .row
+        .col-xs-4.text-center
+          h2
+            if weather.precipTodayIn > 0
+              i.wi.wi-rain
+            else
+              i.wi.wi-cloud
+          p #{weather.precipTodayIn}”
+        .col-xs-4.text-center
+          h2
+            i.wi.wi-strong-wind
+          p #{weather.windMPH} mph
+        .col-xs-4.text-center
+          h2
+            i.wi.wi-wind(class=`wi-towards-${weather.windDirection.toLowerCase()}`)
+          p #{weather.windDirection}
+      table.table.thinner
+        tr
+          td Humidity
+          td.text-right #{weather.relativeHumidity}
+        tr
+          td Wind gust
+          td.text-right #{weather.windGustMPH} mph
+        tr
+          td UV
+          td.text-right #{weather.uv}
+        tr
+          td Feels Like
+          td.text-right #{weather.feelslikeF}°
+        tr
+          td Visibility
+          td.text-right #{weather.visibilityMi} miles

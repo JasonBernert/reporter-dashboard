@@ -1,0 +1,43 @@
+mixin phoneCard(snapshot)
+
+  - const impetuses = ['Report button tapped','Report button tapped while asleep', 'Report triggered by notification', 'Report triggered by setting app to sleep', 'Report triggered by waking up']
+  - const connectionTypes = ['Cellular', 'WiFi', 'No connection']
+
+  - const batteryIcons = ['battery-empty', 'battery-quarter', 'battery-half', 'battery-three-quarters', 'battery-full']
+  - const connectionIcons = ['fa-signal', 'fa-wifi', 'fa-exclamation-triangle']
+  - const impetusesIcons = ['fa-hand-pointer-o','fa-bed','fa-bell-o','fa-bed','fa-eye']
+
+  .row
+    .col-xs-6
+      .dataCard.text-center
+        .dataHeader
+          h5.thinner Impetus
+        .dataBody
+          h1
+            i.fa(class=`${impetusesIcons[snapshot.reportImpetus]}`)
+          p #{impetuses[snapshot.reportImpetus]}
+    .col-xs-6
+      .dataCard.text-center
+        .dataHeader
+          h5.thinner Connection
+        .dataBody
+            h1
+              i.fa(class=`${connectionIcons[snapshot.connection]}`)
+            p #{connectionTypes[snapshot.connection]}
+  .row
+    .col-xs-6
+      .dataCard.text-center
+        .dataHeader
+          h5.thinner Battery
+        .dataBody
+          h1
+            i.fa(class=`fa-${batteryIcons[Math.ceil(snapshot.battery*5)-1]}`)
+          p #{Math.round(snapshot.battery*100)}%
+    .col-xs-6
+      .dataCard.text-center
+        .dataHeader
+          h5.thinner Volume
+        .dataBody
+          h1
+            i.fa.fa-volume-up
+          p #{(snapshot.audio.peak).toFixed(2)} Db

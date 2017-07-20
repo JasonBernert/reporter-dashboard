@@ -10,10 +10,8 @@
 
 $font-stack: 'Roboto', Helvetica, sans-serif;
 $font-monospace: 'Roboto Mono', monospace;
-$white: #FCFDFD;
-$blue-gray: #D8E1E6;
-$off-white: #f1f2f3;
-$light-gray: #DFE3E7;
+$white: #F4F5F7;
+$light-gray: #F0F1F4;
 $dark-gray: #282E37;
 $gradient-morning: #C64188;
 $gradient-day: #108CC8;
@@ -86,8 +84,6 @@ nav {
     transition: all 0.2s ease-in-out 0s;
   }
 
-
-
   a:hover {
     color: $white;
     text-decoration:none;
@@ -128,8 +124,21 @@ footer {
   color: white;
 }
 
+.highlighted {
+  background-color: $dark-gray;
+  font-family: $font-monospace;
+  color: $white;
+  padding: 0.125em 0.3em;
+  margin: 0em 0.3em;
+}
+
 .thinner {
   font-weight: 300;
+}
+
+.light-gray-background {
+  background-color: $light-gray;
+  padding: 30px 0;
 }
 
 .superscript {
@@ -149,12 +158,6 @@ footer {
     line-height: 1.25em;
   }
 
-  .highlighted {
-    background-color: $dark-gray;
-    font-family: $font-monospace;
-    color: $white;
-    padding: 0.125em 0.3em;
-  }
 }
 
 // login form
@@ -202,6 +205,7 @@ footer {
 //  RECENT PAGE STYLES
 
 .dailyHeader {
+  background: white;
   max-width: 30em;
   margin-left: -20px;
   padding: 0.75em 2em 1.25em 2em;
@@ -323,42 +327,53 @@ footer {
 // SNAPSHOT PAGE STYLES
 
 .dataCard {
-  margin: 20px 0;
+  margin-bottom: 30px;
   background-color: white;
-  border: 1px solid #E1E2E3;
-  border-radius: 4px;
+  font-weight: 300;
+  min-height: 166px;
 
   h1, h2, h3, h4, h5, h6, p {
     -webkit-margin-before: 0.125em;
     -webkit-margin-after: 0em;
   }
 
+  table {
+    border-bottom: 1px solid #E1E2E3;
+    margin-bottom: 0px;
+    margin-top: 16px;
+  }
+
+  hr {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  hr:last-child {
+    border-top: none;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    // display: none;
+  }
+
+  .dataHeader {
+     padding: 18px 16px;
+     background-color: #282E37;
+     color: white;
+
+     a {
+       color: white;
+     }
+   }
+
+  .dataBody {
+    padding: 16px 18px;
+  }
+
   .wi-wind {
     font-size: 1.25em;
   }
 
-  .dataBody {
-    padding: 18px 16px 16px 16px;
+  #map {
+    height: 200px;
   }
-
-  .dataHeader {
-    color: white;
-    background: linear-gradient(120deg, rgb(16, 140, 200) 0%, rgb(14, 113, 200) 100%);
-    padding: 22px;
-    border-radius: 4px 4px 0px 0px;
-  }
-
-  table {
-    border-bottom: 1px solid #E1E2E3;
-    margin-bottom: 0px;
-  }
-
-  svg {
-    height: 16px;
-  }
-}
-
-// LEAFLET STYLE
-#map {
-  height: 280px;
 }
