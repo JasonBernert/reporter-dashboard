@@ -13,11 +13,11 @@ exports.weatherIcons = {
   'Partly Cloudy': 'wi-day-cloudy',
   'Scattered Clouds': 'wi-cloud',
   'Mostly Cloudy': 'wi-cloudy',
-  Clear: 'wi-day-sunny',
   Rain: 'wi-showers',
   'Light Rain': 'wi-sprinkle',
   'Heavy Rain': 'wi-rain',
   Snow: 'wi-snow',
   'Ice Pellets': 'wi-hail',
-  Fog: 'wi-fog'
+  Fog: 'wi-fog',
+  Clear: 'wi-day-sunny'
 };

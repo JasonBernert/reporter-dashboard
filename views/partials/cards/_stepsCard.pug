@@ -1,6 +1,16 @@
-mixin stepsCard(steps)
+mixin stepsCard(steps, altitude)
     .dataCard.text-center
+      div(style='height:210px;')
       .dataHeader
-        h5.thinner Steps
+        h2.thinner #{h.addCommas(steps)} Steps
       .dataBody
-        h1 #{steps}
+        .row.light-line
+          .col-xs-4
+            h3.thinner #{h.addCommas(steps)}
+            small Steps
+          .col-xs-4
+            h3.thinner #{altitude.floorsAscended}
+            small Floors Up
+          .col-xs-4
+            h3.thinner #{altitude.floorsDescended}
+            small Floors Down

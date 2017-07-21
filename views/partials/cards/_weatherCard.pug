@@ -6,7 +6,7 @@ mixin weather(weather)
           h2.thinner #{weather.tempF}° 
         .col-xs-6.text-right
           h3
-            i.wi.wi-day-sunny(title=weather.weather)
+            i.wi(class=h.weatherIcons[weather.weather] title=weather.weather)
     .dataBody
       .row
         .col-xs-4.text-center
@@ -22,7 +22,10 @@ mixin weather(weather)
           p #{weather.windMPH} mph
         .col-xs-4.text-center
           h2
-            i.wi.wi-wind(class=`wi-towards-${weather.windDirection.toLowerCase()}`)
+            if (['North', 'South', 'East', 'West'].indexOf(weather.windDirection) >= 0)
+              i.wi.wi-wind(class=`wi-from-${weather.windDirection.charAt(0).toLowerCase()}`)
+            else
+              i.wi.wi-wind(class=`wi-from-${weather.windDirection.toLowerCase()}`)
           p #{weather.windDirection}
       table.table.thinner
         tr

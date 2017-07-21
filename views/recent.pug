@@ -7,10 +7,9 @@ block content
   .cover
     .container.text-center
       .col-sm-12.col-md-8.col-md-offset-2
-        h2 The week of #[span.highlighted #{h.moment(weeklySummary[6].snapshots.date).format('MMMM Do, YYYY')}]
+        h2 The week of #[span.highlighted #{h.moment(weeklySummary[6].snapshots[0].date).format('MMMM Do, YYYY')}]
         h2 you logged #[span.highlighted #{h.addCommas(snapsCount)}] snapshots.
         
-  //- .light-gray-background
   .container
     .col-sm-12.col-md-8.col-md-offset-2
       each day in weeklySummary
