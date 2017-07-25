@@ -1,13 +1,18 @@
 mixin questionCard(questions)
   .dataCard
+    //- pre= h.dump(questions)
     .dataBody
-      each question in questions
-        h4.thinner #{question.questionPrompt} 
-          if question.answeredOptions
-            span.thinner #[span.highlighted #{question.answeredOptions}]
-          if question.locationResponse
-            span.thinner #[span.highlighted #{question.locationResponse.text}]
-          if question.tokens
-            each token in question.tokens
-              span.thinner #[span.highlighted #{token.text}]
-        hr
+      table.table
+        each question in questions
+          tr
+            td
+              h4.thinner #{question.questionPrompt} 
+                if question.answeredOptions
+                  span.thinner #[span.highlighted #{question.answeredOptions}]
+                if question.locationResponse
+                  span.thinner #[span.highlighted #{question.locationResponse.text}]
+                if question.tokens
+                  each token in question.tokens
+                    span.thinner #[span.highlighted #{token.text}]   
+                if question.numericResponse
+                  span.thinner #[span.highlighted #{question.numericResponse}]

@@ -46,15 +46,15 @@ exports.recent = async (req, res) => {
     return;
   }
 
-  // res.json(weeklySummary);
+  res.json(weeklySummary);
 
-  res.render('recent', {
-    title: 'Recent Snapshots',
-    weeklySummary,
-    page,
-    pages,
-    snapsCount
-  });
+  // res.render('recent', {
+  //   title: 'Recent Snapshots',
+  //   weeklySummary,
+  //   page,
+  //   pages,
+  //   snapsCount
+  // });
 };
 
 exports.snapshotDetails = async (req, res) => {

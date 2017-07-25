@@ -1,6 +1,20 @@
 mixin photosCard(photos)
-    .dataCard.text-center
-      .dataHeader
-        h5.thinner Photos
-      .dataBody
-        p #{photos}
+  - const latlon = [];
+  each photo in photos
+    - latlon.push([photo.latitude,-photo.longitude])
+  .dataCard
+    .map(data-coords=`[${latlon}]`)
+    .dataHeader
+      h3.thinner.text-center #{photos.length} #{photos.length === 1 ? 'Photo' : 'Photos'}
+    .dataBody.text-center
+      each photo in photos
+        .row.light-line
+          .col-xs-4
+            h3.thinner #{photo.apertureValue.toFixed(3)}
+            small Aperture
+          .col-xs-4
+            h3.thinner #{photo.exposureTime.toFixed(4)}
+            small Exposure
+          .col-xs-4
+            h3.thinner #{photo.isoSpeed}
+            small ISO

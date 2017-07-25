@@ -27,7 +27,7 @@ mixin weather(weather)
             else
               i.wi.wi-wind(class=`wi-from-${weather.windDirection.toLowerCase()}`)
           p #{weather.windDirection}
-      table.table.thinner
+      table.table.thinner(style='margin-top: 16px')
         tr
           td Humidity
           td.text-right #{weather.relativeHumidity}
