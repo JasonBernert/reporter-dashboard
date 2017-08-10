@@ -12,10 +12,18 @@ const Snapshot = require('../models/Snapshot');
 const data = JSON.parse(fs.readFileSync(path.join(__dirname, '/reporter-export.json'), 'utf-8'));
 const snapshots = data.snapshots;
 
+async function deleteData() {
+  console.log('Deleting snapshot data...');
+  await Snapshot.remove();
+  console.log('Data deleted.');
+  process.exit();
+}
+
 async function loadData() {
   try {
+    console.log('Loading snapshot data...');
     await Snapshot.insertMany(snapshots);
-    console.log('Uploading data complete!');
+    console.log('Loading data complete!');
     process.exit();
   } catch (e) {
     console.log(e);
@@ -23,4 +31,8 @@ async function loadData() {
   }
 }
 
-loadData();
+if (process.argv.includes('--delete')) {
+  deleteData();
+} else {
+  loadData();
+}

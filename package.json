@@ -11,7 +11,8 @@
   "scripts": {
     "start": "nodemon app.js",
     "file-import": "node ./data/load-data",
-    "dropbox-import": "node ./data/dropbox-load"
+    "dropbox-import": "node ./data/dropbox-load",
+    "delete-data": "node ./data/load-data --delete"
   },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",

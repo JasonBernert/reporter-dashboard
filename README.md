@@ -55,6 +55,8 @@ Data can be imported via dropbox or a JSON export from Reporter. First make sure
 1. Make sure you have your Dropbox developer token in `variables.env`.
 2. Run `npm run dropbox-import`.
 
+You can also delete your snapshot data with `npm run delete-data` in case you need to start fresh.
+
 ## Other
 This project is used [hackathon-starter](https://github.com/sahat/hackathon-starter), a boilerplate for Node.js web applications.
 [Weather icons](https://erikflowers.github.io/weather-icons/) created by Erik Flowers. v1.0 artwork by Lukas Bischoff. v1.1 - 2.0 artwork by Erik Flowers.
