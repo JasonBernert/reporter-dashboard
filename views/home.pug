@@ -10,8 +10,12 @@ block content
         h2 mostly from #[span.highlighted #{summary.commonCity},#{summary.commonState}].
 
   .light-gray-background
-    .container-fluid
+    .container
       .row
-        .col-sm-12
-          p 
+        .col-sm-6
+          .dataCard.text-center
+            #chart
+            //- - viz.barChart()
+            .dataHeader
+              h3 Test
       
