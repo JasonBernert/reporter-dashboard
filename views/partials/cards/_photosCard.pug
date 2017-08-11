@@ -1,7 +1,8 @@
 mixin photosCard(photos)
   - const latlon = [];
   each photo in photos
-    - latlon.push([photo.latitude,-photo.longitude])
+    if photo.latitude != 0
+      - latlon.push([photo.latitude,-photo.longitude])
   .dataCard
     .map(data-coords=`[${latlon}]`)
     .dataHeader
@@ -10,11 +11,14 @@ mixin photosCard(photos)
       each photo in photos
         .row.light-line
           .col-xs-4
-            h3.thinner #{photo.apertureValue.toFixed(3)}
-            small Aperture
+            if photo.apertureValue
+              h3.thinner #{photo.apertureValue.toFixed(3)}
+              small Aperture
           .col-xs-4
-            h3.thinner #{photo.exposureTime.toFixed(4)}
-            small Exposure
+            if photo.exposureTime
+              h3.thinner #{photo.exposureTime.toFixed(4)}
+              small Exposure
           .col-xs-4
-            h3.thinner #{photo.isoSpeed}
-            small ISO
+            if photo.isoSpeed
+              h3.thinner #{photo.isoSpeed}
+              small ISO

@@ -7,17 +7,16 @@ block content
   .cover
     .container.text-center
       .col-sm-12.col-md-8.col-md-offset-2
-        //- h2 The week of #[span.highlighted #{h.moment(weeklySummary[6].snapshots[0].date).format('MMMM Do, YYYY')}]
-        //- h2 you logged #[span.highlighted #{h.addCommas(snapsCount)}] snapshots.
+        h2 The week of #[span.highlighted #{h.moment(weeklySummary[6].snapshots[0].date).format('MMMM Do, YYYY')}]
+        h2 you logged #[span.highlighted #{h.addCommas(snapsCount)}] snapshots.
         
   .container
     .col-sm-12.col-md-8.col-md-offset-2
       each day in weeklySummary
         .dailyHeader
-          - const dailyDate = `${day._id.year}-${day._id.month}-${day._id.day}`
-          //- - const dailyDate = day._id.substring(2)
+          //- - const dailyDate = `${day._id.year}-${day._id.month}-${day._id.day}`
+          - const dailyDate = day._id.substring(2)
           h1 #{h.moment(dailyDate).format('dddd, MMMM D')}#[sup.superscript #{h.moment(dailyDate).format('Do').slice(-2)}]
         .cardContainer
           +dailySummary(day.snapshots)
   +pagination(page, pages, count)
-  //- pre= h.dump(weeklySummary)

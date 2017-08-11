@@ -132,24 +132,17 @@ const snapshotSchema = new mongoose.Schema({
 
 snapshotSchema.statics.countOccurrences = function (q) {
   return this.aggregate([
-    // { $match: '$tags' },
-    // { $unwind: '$tags' },
     { $group: { _id: `$${q}`, count: { $sum: 1 } } },
     { $sort: { count: -1 } }
   ]);
 };
 
 snapshotSchema.statics.dailySummary = function () {
-  // TODO: Maybe this would work better?
-  // Sort reports by $sectionIdentifier desc.
-  // Find $sectionIdentifier of date where reportImpetus === 5, aka waking up.
-  // Then find the next report where reportImpetus === 4, aka sleeping.
-  // Then return those reports and reports in bewteen.
-  // https://stackoverflow.com/questions/8136652/query-mongodb-on-month-day-year-of-a-datetime
   return this.aggregate([
     { $group: {
-      _id: { year: { $year: '$date' }, month: { $month: '$date' }, day: { $dayOfMonth: '$date' } },
+      _id: '$sectionIdentifier',
       count: { $sum: 1 },
+      time: { $push: { year: { $year: '$date' }, month: { $month: '$date' }, day: { $dayOfMonth: '$date' } } },
       snapshots: { $push: { _id: '$_id', date: '$date', responses: '$responses' } }
     } },
     { $project: {
@@ -157,7 +150,7 @@ snapshotSchema.statics.dailySummary = function () {
       count: 1,
       _id: 1
     } },
-    { $sort: { '_id.year': -1, '_id.month': -1, '_id.day': -1 } }
+    { $sort: { 'time.year': -1, 'time.month': -1, 'time.day': -1, 'snapshots.date': -1 } }
   ]);
 };
 
