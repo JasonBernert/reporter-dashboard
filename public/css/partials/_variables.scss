@@ -1,0 +1,16 @@
+$font-stack: 'Roboto', Helvetica, sans-serif;
+$font-monospace: 'Roboto Mono', monospace;
+$white: #F4F5F7;
+$light-gray: #F0F1F4;
+$dark-gray: #282E37;
+$gradient-morning: #C64188;
+$gradient-day: #108CC8;
+$gradient-evening: #843ddd;
+
+@mixin background($from-color, $to-color) {
+  background: -webkit-linear-gradient(-45deg, $from-color 0%, $to-color 100%);
+  background: -moz-linear-gradient(-45deg, $from-color 0%, $to-color 100%);
+  background: -o-linear-gradient(-45deg, $from-color 0%, $to-color 100%);
+  background: -ms-linear-gradient(-45deg, $from-color 0%, $to-color 100%);
+  background: linear-gradient(-45deg, $from-color 0%, $to-color 100%);
+}

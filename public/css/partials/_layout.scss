@@ -1,0 +1,62 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: $font-stack;
+}
+
+// Helpers
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.full-gradient-background {
+  width: 100%;
+  height: 100vh;
+  @include background( $gradient-evening, $gradient-morning );
+  margin: 0px;
+  color: white;
+}
+
+.highlighted {
+  background-color: $dark-gray;
+  font-family: $font-monospace;
+  color: $white;
+  padding: 0.125em 0.3em;
+  margin: 0em 0.3em;
+  white-space: pre;
+}
+
+.thinner {
+  font-weight: 300;
+}
+
+.light-gray-background {
+  background-color: $light-gray;
+  padding: 30px 0;
+}
+
+.superscript {
+  text-transform: uppercase;
+  font-size:0.5em;
+  top: -0.7em;
+  font-weight: 700;
+}
+
+.cover {
+  @include background( $gradient-evening, $gradient-morning );
+  padding: 200px 0px;
+  color: white;
+
+  h2,h3 {
+    font-weight: 300;
+    line-height: 1.25em;
+  }
+
+}

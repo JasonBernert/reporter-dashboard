@@ -1,0 +1,119 @@
+.dailyHeader {
+  background: white;
+  max-width: 36em;
+  margin-left: -20px;
+  padding: 0.75em 2em 1.25em 2em;
+  border: 4px solid rgb(71,164,180);
+  border-image: linear-gradient( $gradient-evening, $gradient-morning ) 1;
+}
+
+.cardContainer{
+  padding: 10px 30px 60px 30px;
+  border-right: 0px solid;
+  border-left: 2px solid rgb(240,166,87);
+  -webkit-border-image: -webkit-linear-gradient($gradient-morning, $gradient-day, $gradient-evening) 1 100%;
+
+  h1 {
+    color: #414243;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+  }
+
+  h4 {
+    color: #313233;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    line-height: 2em;
+    font-weight: 500;
+  }
+
+  p {
+    font-weight: 300;
+    color: #515253;
+    line-height: 1.5em;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+  }
+
+  a {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  a:visited {
+    color: #333;
+    text-decoration: none;
+  }
+
+  .card {
+    transition: all ease 0.12s;
+    padding: 12px 16px;
+    border: 1px solid #F1F2F3;
+    border-radius: 4px;
+    margin: 20px 0px 0px 0px;
+    background-color: #fff;
+  }
+
+  .card:hover {
+    border: 1px solid #E1E2E3;
+    box-shadow: 0px 2px 6px #f1f2f3;
+  }
+
+  .card:before {
+    position: absolute;
+    content: '';
+    width: 16px;
+    height: 16px;
+    margin: 7px -56px;
+    background-color: white;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: all ease 0.2s;
+    border: 3px solid $gradient-day;
+  }
+
+  .card:hover:before {
+    border: 8px solid $gradient-day;
+  }
+
+  .morning:before {
+    border: 3px solid $gradient-morning;
+  }
+
+  .morning:hover:before {
+    border: 8px solid $gradient-morning;
+  }
+
+  .evening:before {
+    border: 3px solid $gradient-evening;
+  }
+
+  .evening:hover:before {
+    border: 8px solid $gradient-evening;
+  }
+}
+
+.dailyHeader:first-child {
+  margin-top: 40px;
+}
+
+.pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+
+  a {
+    text-decoration: none;
+    color: #515253;
+    padding: 0.25em 0.5em;
+    margin: 0 1.5em;
+    border: 1px solid #333;
+  }
+
+  a:hover {
+    color: #fff;
+    background-color: #515253;
+  }
+}

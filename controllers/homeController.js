@@ -21,7 +21,7 @@ exports.index = async (req, res) => {
   };
 
   res.render('home', {
-    title: 'Home',
+    title: 'Reporter Dashboard',
     summary
   });
 };
@@ -45,8 +45,6 @@ exports.recent = async (req, res) => {
     res.redirect('/recent');
     return;
   }
-
-  // res.json(weeklySummary);
 
   res.render('recent', {
     title: 'Recent Snapshots',

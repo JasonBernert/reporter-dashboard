@@ -7,7 +7,7 @@ Sorry. Not quite ready yet...
 Reporter Dashboard brings all your data from the [Reporter App](http://www.reporter-app.com/) to the browser. The Reporter Dashboard ingests your data from either a Reporter App export or directly from Dropbox to mongoDB using the current [schema](https://gist.github.com/dbreunig/9315705). The API endpoints deliver basic things like a summary of the data, a month summary of your wake up, sleep, and daily data. From here the data is visualized with [D3](https://d3js.org/) on your dashboard. Customize the dashboard with your data to create new endpoints and new visualizations!
 
 #### Always Up To Date: Reporter App → Dropbox → MongoDB
-If you ingest your data to dropbox, you can use `dropbox-load.js` to import all existing data into the database or run the script on your server to always keep your dashboard up to date. First, you will need a `DROPBOX_TOKEN`. Find how to get all the needed environment variables [below](#environment-variables).
+If you upload your data to dropbox, you can use `dropbox-load.js` to import all existing data into the database or run the script on your server to always keep your dashboard up to date. First, you will need a `DROPBOX_TOKEN`. Find how to get all the needed environment variables [below](#environment-variables).
 
 #### Private
 User permissions stop anyone from seeing your personal data without, well, your permission. Reporter Dashboard requires a login to see anything from the app. Accounts can only be made by those with logins.
