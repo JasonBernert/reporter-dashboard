@@ -15,7 +15,7 @@ block content
           h2 #[span.highlighted #{h.moment(snapshot[0].date).format('h:mm A')}]
           h2 #[span.highlighted #{h.moment(snapshot[0].date).format('dddd, MMMM Do YYYY')}]
           h2 #[span.highlighted #{snapshot[0].location.placemark.locality},#{snapshot[0].location.placemark.administrativeArea}]
-
+  
   .light-gray-background
     .container
       .row
@@ -36,4 +36,4 @@ block content
           .col-sm-8
             +photosCard(snapshot[0].photoSet.photos)
 
-    //- pre= h.dump(snapshot[0])
+  pre= h.dump(snapshot[0])

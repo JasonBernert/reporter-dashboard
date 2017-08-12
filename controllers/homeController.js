@@ -28,7 +28,7 @@ exports.index = async (req, res) => {
 
 exports.recent = async (req, res) => {
   const page = req.params.page || 1;
-  const limit = 27;
+  const limit = 7;
   const skip = (page * limit) - limit;
 
   const weeklySummaryPromise = Snapshot
