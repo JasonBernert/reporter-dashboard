@@ -14,15 +14,16 @@ block content
         .col-sm-6.col-sm-offset-3.text-center
           h2 #[span.highlighted #{h.moment(snapshot[0].date).format('h:mm A')}]
           h2 #[span.highlighted #{h.moment(snapshot[0].date).format('dddd, MMMM Do YYYY')}]
-          h2 #[span.highlighted #{snapshot[0].location.placemark.locality},#{snapshot[0].location.placemark.administrativeArea}]
+          h2 #[span.highlighted  #{snapshot[0].location.placemark.locality},#{snapshot[0].location.placemark.administrativeArea}]
   
   .light-gray-background
     .container
       .row
         .col-sm-4
           +stepsCard(snapshot[0].steps, snapshot[0].altitude)
-        .col-sm-4
-          +weather(snapshot[0].weather)
+        if snapshot[0].weather
+          .col-sm-4
+            +weather(snapshot[0].weather)
         .col-sm-4
           - const question = snapshot[0].responses.find(x => x.questionPrompt === 'Where are you?')
           +location(snapshot[0].location, question, snapshot[0].altitude)
@@ -36,4 +37,4 @@ block content
           .col-sm-8
             +photosCard(snapshot[0].photoSet.photos)
 
-  pre= h.dump(snapshot[0])
+  //- pre= h.dump(snapshot[0])
