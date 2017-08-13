@@ -7,7 +7,7 @@
   border-image: linear-gradient( $gradient-evening, $gradient-morning ) 1;
 }
 
-.cardContainer{
+.cardContainer {
   padding: 10px 30px 60px 30px;
   border-right: 0px solid;
   border-left: 2px solid rgb(240,166,87);
@@ -71,6 +71,7 @@
     box-sizing: border-box;
     transition: all ease 0.2s;
     border: 3px solid $gradient-day;
+    outline: 2px solid white;
   }
 
   .card:hover:before {
@@ -96,6 +97,10 @@
 
 .dailyHeader:first-child {
   margin-top: 40px;
+}
+
+.cardContainer:last-child {
+  padding: 10px 30px 20px 30px;
 }
 
 .pagination {

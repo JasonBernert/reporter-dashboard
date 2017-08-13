@@ -24,6 +24,7 @@ exports.weatherIcons = {
 
 exports.createSummary = (responses) => {
   let summary = '';
+
   function arrayToSentance(arr) {
     if (arr.length > 2) {
       return `${arr.slice(0, arr.length - 1).join(', ')} and ${arr.slice(-1)}`;
@@ -32,6 +33,16 @@ exports.createSummary = (responses) => {
     }
     return arr;
   }
+
+  function numToWord(num) {
+    const numbers = ['', 'one ', 'two ', 'three ', 'four ', 'five ', 'six ', 'seven ', 'eight ', 'nine '];
+
+    if (num < 10) {
+      return numbers[num];
+    }
+    return num;
+  }
+
   responses.forEach((response) => {
     if (response.questionPrompt === 'How did you sleep?') {
       summary += `I slept ${response.answeredOptions[0].toLowerCase()}. `;
@@ -58,7 +69,7 @@ exports.createSummary = (responses) => {
           activities.forEach((activity) => {
             activitiesArray.push(activity.text.toLowerCase());
           });
-          if (activitiesArray[0] === 'No One') {
+          if (activitiesArray.length === 0) {
             summary += 'I was doing nothing... ';
           } else {
             summary += `I was ${arrayToSentance(activitiesArray)}. `;
@@ -92,7 +103,12 @@ exports.createSummary = (responses) => {
       }
     }
     if (response.questionPrompt === 'How many coffees did you have today?') {
-      summary += `I had ${response.numericResponse} coffees today. `;
+      if (response.numericResponse === '0') {
+        summary += 'I didn’t drink coffee today. ';
+      } else {
+        const coffees = response.numericResponse > 1 ? 'coffees' : 'coffee';
+        summary += `I had ${numToWord(response.numericResponse)} ${coffees} today. `;
+      }
     }
     if (response.questionPrompt === 'Did you exercise?') {
       if (response.answeredOptions[0] === 'Yes') {
