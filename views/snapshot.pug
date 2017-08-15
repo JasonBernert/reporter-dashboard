@@ -21,20 +21,17 @@ block content
       .row
         .col-sm-4
           +stepsCard(snapshot[0].steps, snapshot[0].altitude)
-        if snapshot[0].weather
-          .col-sm-4
-            +weather(snapshot[0].weather)
+        .col-sm-4
+          +weather(snapshot[0].weather)
         .col-sm-4
           - const question = snapshot[0].responses.find(x => x.questionPrompt === 'Where are you?')
           +location(snapshot[0].location, question, snapshot[0].altitude)
-      .row
         .col-sm-8
           +questionCard(snapshot[0].responses)
         .col-sm-4
           +phoneCard(snapshot[0])
-      if snapshot[0].photoSet.photos.length > 0
-        .row
+        if snapshot[0].photoSet.photos.length > 0
           .col-sm-8
             +photosCard(snapshot[0].photoSet.photos)
 
-  //- pre= h.dump(snapshot[0])
+  pre= h.dump(snapshot[0])
