@@ -32,12 +32,13 @@ exports.getPeoples = async (req, res) => {
 };
 
 exports.steps = async (req, res) => {
-  const aMonthAgo = moment().subtract(1, 'M');
+  // const aMonthAgo = moment().subtract(1, 'M');
+  const aWeekAgo = moment().subtract(1, 'w');
 
   const stepSummary = await Snapshot
     .find()
     .sort({ date: -1 })
-    .where('date').gt(aMonthAgo)
+    .where('date').gt(aWeekAgo)
     .select('steps date -_id');
 
   res.json(stepSummary);

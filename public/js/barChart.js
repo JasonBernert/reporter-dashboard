@@ -3,9 +3,9 @@ function BarChart() {
   let height;
   let x;
   let y;
-  const xScale = d3.scaleTime();
+  const xScale = d3.scaleBand().padding(0.5);
   const yScale = d3.scaleLinear();
-  const margin = { top: 15, bottom: 20, left: 40, right: 20 };
+  const margin = { top: 15, bottom: 20, left: 35, right: 30 };
 
   function my(selection) {
     selection.each(function (data) {
@@ -20,17 +20,17 @@ function BarChart() {
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
 
-      xScale.domain(d3.extent(data, d => d[x])).range([innerWidth, 0]);
+      xScale.domain(data.map(d => d[x])).range([0, innerWidth]);
       yScale.domain([0, d3.max(data, d => d[y])]).range([innerHeight, 0]);
 
       g.append('g')
         .attr('class', 'axis axis--x')
         .attr('transform', `translate(0, ${innerHeight})`)
-        .call(d3.axisBottom(xScale));
+        .call(d3.axisBottom(xScale).tickFormat(d3.timeFormat('%m-%d')));
 
       g.append('g')
         .attr('class', 'axis axis--y')
-        .call(d3.axisLeft(yScale).ticks(5))
+        .call(d3.axisLeft(yScale))
       .append('text')
         .attr('transform', 'rotate(-90)')
         .attr('y', 6)
@@ -44,7 +44,7 @@ function BarChart() {
           .attr('class', 'bar')
           .attr('x', d => xScale(d[x]))
           .attr('y', d => yScale(d[y]))
-          .attr('width', 4)
+          .attr('width', xScale.bandwidth())
           .attr('height', d => innerHeight - yScale(d[y]));
     });
   }
@@ -69,8 +69,10 @@ function BarChart() {
 }
 
 function createBarChart(endpoint) {
+  // const divHeight = document.querySelectorAll('.dataBody')[0].offsetHeight;
+  const divWidth = document.querySelectorAll('.dataBody')[0].offsetWidth;
   const barChart = BarChart()
-    .width(600)
+    .width(divWidth)
     .height(300)
     .x('date')
     .y('steps');
