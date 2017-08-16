@@ -4,7 +4,7 @@ mixin stepsCard(steps, altitude, sectionIdentifier)
         svg#steps-bar-chart
         script.
           $(document).ready(function() {
-            createBarChart(`../api/v1/steps/#{sectionIdentifier}`,'steps-bar-chart');
+            createBarChart('../api/v1/steps/#{sectionIdentifier}','steps-bar-chart');
           });
       .dataHeader
         h2.thinner #{h.addCommas(steps)} Steps

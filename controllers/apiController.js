@@ -32,7 +32,7 @@ exports.getPeoples = async (req, res) => {
 };
 
 exports.steps = async (req, res) => {
-  const aWeekAgo = moment().subtract(1, 'w');
+  const aWeekAgo = moment().subtract(2, 'w');
 
   const stepSummary = await Snapshot
     .find()

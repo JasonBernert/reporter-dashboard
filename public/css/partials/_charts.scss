@@ -1,0 +1,23 @@
+.axis--x .tick line {
+  stroke: none;
+}
+
+.axis--y .domain {
+  stroke: none;
+}
+
+.axis--y .tick line {
+  stroke: $light-gray;
+}
+
+.tick text {
+  fill: $dark-gray;
+}
+
+.domain {
+  stroke: $light-gray;
+}
+
+.bar {
+  fill: #54278f;
+}
