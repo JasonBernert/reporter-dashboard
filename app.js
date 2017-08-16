@@ -113,6 +113,7 @@ app.get('/snapshot/:id', passportConfig.isAuthenticated, homeController.snapshot
 app.get('/api/v1/past/:limit', apiController.getLastFew);
 app.get('/api/v1/people', apiController.getPeoples);
 app.get('/api/v1/steps', apiController.steps);
+app.get('/api/v1/steps/:sectionIdentifier', apiController.stepsOnDay);
 
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);

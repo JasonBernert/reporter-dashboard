@@ -20,7 +20,7 @@ block content
     .container
       .row
         .col-sm-4
-          +stepsCard(snapshot[0].steps, snapshot[0].altitude)
+          +stepsCard(snapshot[0].steps, snapshot[0].altitude, snapshot[0].sectionIdentifier)
         .col-sm-4
           +weather(snapshot[0].weather)
         .col-sm-4

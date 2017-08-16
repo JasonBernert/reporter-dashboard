@@ -1,8 +1,6 @@
 function BarChart() {
   let width;
   let height;
-  let x;
-  let y;
   const xScale = d3.scaleBand().padding(0.5);
   const yScale = d3.scaleLinear();
   const margin = { top: 15, bottom: 20, left: 35, right: 30 };
@@ -12,6 +10,8 @@ function BarChart() {
       const svg = d3.select(this)
         .attr('width', width)
         .attr('height', height);
+
+      const [y, x] = Object.keys(data[0]);
 
       let g = svg.selectAll('g').data([1]);
       g = g.enter().append('g').merge(g)
@@ -49,14 +49,6 @@ function BarChart() {
     });
   }
 
-  my.x = function (_) {
-    return arguments.length ? (x = _, my) : x;
-  };
-
-  my.y = function (_) {
-    return arguments.length ? (y = _, my) : y;
-  };
-
   my.width = function (_) {
     return arguments.length ? (width = _, my) : width;
   };
@@ -68,14 +60,11 @@ function BarChart() {
   return my;
 }
 
-function createBarChart(endpoint) {
-  // const divHeight = document.querySelectorAll('.dataBody')[0].offsetHeight;
-  const divWidth = document.querySelectorAll('.dataBody')[0].offsetWidth;
+function createBarChart(endpoint, element) {
+  const parent =  document.getElementById(element).parentNode;
   const barChart = BarChart()
-    .width(divWidth)
-    .height(300)
-    .x('date')
-    .y('steps');
+    .width(parent.offsetWidth)
+    .height(parent.offsetHeight);
 
   d3.json(endpoint, (data) => {
     const parseDate = d3.utcParse('%Y-%m-%dT%H:%M:%S.%LZ');
@@ -83,7 +72,7 @@ function createBarChart(endpoint) {
       d.date = parseDate(d.date);
       return d;
     });
-    d3.select('#bar-chart')
+    d3.select(`#${element}`)
       .datum(data)
       .call(barChart);
   });

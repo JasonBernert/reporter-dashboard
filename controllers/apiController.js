@@ -32,7 +32,6 @@ exports.getPeoples = async (req, res) => {
 };
 
 exports.steps = async (req, res) => {
-  // const aMonthAgo = moment().subtract(1, 'M');
   const aWeekAgo = moment().subtract(1, 'w');
 
   const stepSummary = await Snapshot
@@ -42,4 +41,14 @@ exports.steps = async (req, res) => {
     .select('steps date -_id');
 
   res.json(stepSummary);
+};
+
+exports.stepsOnDay = async (req, res) => {
+  const sectionIdentifier = req.params.sectionIdentifier;
+
+  const dateStepSummary = await Snapshot
+    .find({ sectionIdentifier })
+    .select('steps date -_id');
+
+  res.json(dateStepSummary);
 };
