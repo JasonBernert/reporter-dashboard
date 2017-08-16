@@ -57,7 +57,7 @@ function LineChart() {
 
       g.append('path')
           .datum(data)
-          .attr('fill', '#8076EF')
+          .attr('fill', '#ae017e')
           // .attr('stroke', 'steelblue')
           .attr('stroke-linejoin', 'round')
           .attr('stroke-linecap', 'round')

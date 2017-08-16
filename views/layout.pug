@@ -19,8 +19,10 @@ html
   body
     include partials/header
 
-    //- .container
-    //-   include partials/flash
+    .container.flashes
+      .row
+        .col-sm-6.col-sm-offset-4
+          include partials/flash
     block content
 
     include partials/footer

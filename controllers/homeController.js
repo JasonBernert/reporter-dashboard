@@ -59,6 +59,11 @@ exports.snapshotDetails = async (req, res) => {
   const _id = req.params.id;
   const q = { _id };
   const snapshot = await Snapshot.find(q);
+  if (!snapshot.length) {
+    req.flash('errors', 'Snapshot does not exist!');
+    res.redirect('/recent');
+    return;
+  }
   res.render('snapshot', {
     title: 'Snapshot Summary',
     snapshot
