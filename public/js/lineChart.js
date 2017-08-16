@@ -1,7 +1,7 @@
-function BarChart() {
+function LineChart() {
   let width;
   let height;
-  const xScale = d3.scaleBand().padding(0.5);
+  const xScale =  d3.scaleTime();
   const yScale = d3.scaleLinear();
   const margin = { top: 10, bottom: 20, left: 40, right: 10 };
 
@@ -13,6 +13,16 @@ function BarChart() {
 
       const [y, x] = Object.keys(data[0]);
 
+      // const line = d3.line()
+      //                .x(d => xScale(d[x]))
+      //                .y(d => yScale(d[y]))
+      //                .curve(d3.curveCardinal(1));
+
+      const area = d3.area()
+                     .curve(d3.curveStepAfter)
+                     .x(d => xScale(d[x]))
+                     .y1(d => yScale(d[y]));
+
       let g = svg.selectAll('g').data([1]);
       g = g.enter().append('g').merge(g)
           .attr('transform', `translate( ${margin.left} , ${margin.top} )`);
@@ -20,8 +30,9 @@ function BarChart() {
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
 
-      xScale.domain(data.map(d => d[x])).range([0, innerWidth]);
+      xScale.domain(d3.extent(data, d => d[x])).range([0, innerWidth]);
       yScale.domain([0, d3.max(data, d => d[y])]).range([innerHeight, 0]);
+      area.y0(yScale(0));
 
       g.append('g')
         .attr('class', 'axis axis--x')
@@ -29,7 +40,6 @@ function BarChart() {
         .call(d3.axisBottom(xScale)
                 .ticks(6)
                 .tickSizeOuter(0)
-                .tickFormat(d3.timeFormat('%H:%M'))
               );
 
       g.append('g')
@@ -45,16 +55,14 @@ function BarChart() {
         .attr('text-anchor', 'end')
         .text('Frequency');
 
-      g.selectAll('.bar')
-        .data(data)
-        .enter().append('rect')
-          .attr('class', 'bar')
-          .attr('x', d => xScale(d[x]))
-          .attr('y', d => yScale(d[y]))
-          .attr('width', xScale.bandwidth())
-          .attr('height', d => innerHeight - yScale(d[y]));
-          // .attr('rx', xScale.bandwidth() / 2)
-          // .attr('ry', xScale.bandwidth() / 2);
+      g.append('path')
+          .datum(data)
+          .attr('fill', '#8076EF')
+          // .attr('stroke', 'steelblue')
+          .attr('stroke-linejoin', 'round')
+          .attr('stroke-linecap', 'round')
+          .attr('stroke-width', 1.5)
+          .attr('d', area);
     });
   }
 
@@ -69,9 +77,9 @@ function BarChart() {
   return my;
 }
 
-function createBarChart(endpoint, element) {
+function createLineChart(endpoint, element) {
   const parent =  document.getElementById(element).parentNode;
-  const barChart = BarChart()
+  const lineChart = LineChart()
     .width(parent.offsetWidth)
     .height(parent.offsetHeight);
 
@@ -83,6 +91,6 @@ function createBarChart(endpoint, element) {
     });
     d3.select(`#${element}`)
       .datum(data)
-      .call(barChart);
+      .call(lineChart);
   });
 }
