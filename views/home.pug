@@ -17,8 +17,18 @@ block content
               svg#steps-line-chart
               script.
                 $(document).ready(function() {
-                  createLineChart('./api/v1/steps','steps-line-chart');
+                  createLineChart('./api/v1/steps','steps-line-chart', 'date', 'steps' );
                 });
             .dataHeader
               h3 Steps
+        .col-sm-6
+          .dataCard.text-center.bar
+            .chart
+              svg#people-line-chart
+              script.
+                $(document).ready(function() {
+                  createLineChart('./api/v1/people','people-line-chart', '_id', 'count');
+                });
+            .dataHeader
+              h3 People              
       

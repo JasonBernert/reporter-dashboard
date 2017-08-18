@@ -1,4 +1,6 @@
 function LineChart() {
+  let x;
+  let y;
   let width;
   let height;
   const xScale =  d3.scaleTime();
@@ -10,13 +12,6 @@ function LineChart() {
       const svg = d3.select(this)
         .attr('width', width)
         .attr('height', height);
-
-      const [y, x] = Object.keys(data[0]);
-
-      // const line = d3.line()
-      //                .x(d => xScale(d[x]))
-      //                .y(d => yScale(d[y]))
-      //                .curve(d3.curveCardinal(1));
 
       const area = d3.area()
                      .curve(d3.curveStepAfter)
@@ -58,7 +53,6 @@ function LineChart() {
       g.append('path')
           .datum(data)
           .attr('fill', '#ae017e')
-          // .attr('stroke', 'steelblue')
           .attr('stroke-linejoin', 'round')
           .attr('stroke-linecap', 'round')
           .attr('stroke-width', 1.5)
@@ -74,19 +68,29 @@ function LineChart() {
     return arguments.length ? (height = _, my) : height;
   };
 
+  my.x = function (_) {
+    return arguments.length ? (x = _, my) : x;
+  };
+
+  my.y = function (_) {
+    return arguments.length ? (y = _, my) : y;
+  };
+
   return my;
 }
 
-function createLineChart(endpoint, element) {
+function createLineChart(endpoint, element, x, y) {
   const parent =  document.getElementById(element).parentNode;
   const lineChart = LineChart()
+    .x(x)
+    .y(y)
     .width(parent.offsetWidth)
     .height(parent.offsetHeight);
 
   d3.json(endpoint, (data) => {
     const parseDate = d3.utcParse('%Y-%m-%dT%H:%M:%S.%LZ');
     data.forEach((d) => {
-      d.date = parseDate(d.date);
+      d[x] = parseDate(d[x]);
       return d;
     });
     d3.select(`#${element}`)
