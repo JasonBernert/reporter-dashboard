@@ -3,7 +3,7 @@ function LineChart() {
   let y;
   let width;
   let height;
-  const xScale =  d3.scaleTime();
+  const xScale = d3.scaleTime();
   const yScale = d3.scaleLinear();
   const margin = { top: 10, bottom: 20, left: 40, right: 10 };
 
@@ -42,13 +42,7 @@ function LineChart() {
         .call(d3.axisLeft(yScale)
                 .ticks(6)
                 .tickSizeInner(-innerWidth)
-              )
-      .append('text')
-        .attr('transform', 'rotate(-90)')
-        .attr('y', 6)
-        .attr('dy', '0.71em')
-        .attr('text-anchor', 'end')
-        .text('Frequency');
+              );
 
       g.append('path')
           .datum(data)

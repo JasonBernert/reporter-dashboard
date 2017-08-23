@@ -33,7 +33,7 @@ exports.getPeoples = async (req, res) => {
 };
 
 exports.steps = async (req, res) => {
-  const aWeekAgo = moment().subtract(2, 'w');
+  const aWeekAgo = moment().subtract(1, 'w');
 
   const stepSummary = await Snapshot
     .find()
@@ -64,4 +64,34 @@ exports.excercise = async (req, res) => {
     ]);
 
   res.json(lastExcercised);
+};
+
+exports.coffees = async (req, res) => {
+  const coffees = await Snapshot
+    .aggregate([{ $unwind: '$responses' },
+                { $match: { 'responses.questionPrompt': 'How many coffees did you have today?' } },
+                { $project: { date: 1, coffees: '$responses.numericResponse' } },
+                { $sort: { date: 1 } },
+                { $limit: 7 }
+    ]);
+
+  res.json(coffees);
+};
+
+// TODO: Need to calculate sleeping patterns first
+exports.anAverageDay = async (req, res) => {
+  const anAverageDay = await Snapshot
+    .aggregate([
+      { $unwind: '$responses' },
+      { $match: { 'responses.questionPrompt': 'What are you doing?' } },
+      { $project: { 'responses.tokens': 1, date: 1 } },
+      { $unwind: '$responses.tokens' },
+      { $group: {
+        _id: { $hour: '$date' },
+        activities: { $push: '$responses.tokens.text' }
+      } },
+      { $sort: { _id: 1 } }
+      // { $sortByCount: '$activities' }
+    ]);
+  res.json(anAverageDay);
 };

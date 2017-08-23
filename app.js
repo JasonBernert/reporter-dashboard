@@ -115,6 +115,8 @@ app.get('/api/v1/people', apiController.getPeoples);
 app.get('/api/v1/steps', apiController.steps);
 app.get('/api/v1/steps/:sectionIdentifier', apiController.stepsOnDay);
 app.get('/api/v1/excercise', apiController.excercise);
+app.get('/api/v1/anAverageDay', apiController.anAverageDay);
+app.get('/api/v1/coffees', apiController.coffees);
 
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);

@@ -1,0 +1,21 @@
+mixin weeklyStepSummary()
+  .dataCard.text-center.bar
+    .chart
+      svg#steps-line-chart
+      script.
+        $(document).ready(function() {
+          createLineChart('./api/v1/steps','steps-line-chart', 'date', 'steps' );
+        });
+    .dataHeader
+      h3 Weekly Steps
+    .dataBody
+      .row
+        .col-xs-4
+          h3.thinner 23,123
+          small Total Steps
+        .col-xs-4
+          h3.thinner 8,305
+          small Daily Average
+        .col-xs-4
+          h3.thinner +1,432
+          small Last Week Change

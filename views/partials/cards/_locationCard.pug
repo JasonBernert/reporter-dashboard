@@ -14,7 +14,7 @@ mixin location(location, question, altitude)
         h3.thinner= location.placemark.name
       p #{location.placemark.locality}, #{location.placemark.administrativeArea}
     .dataBody
-      .row.light-line
+      .row
         .col-xs-4
           h3.thinner #{h.addCommas(Math.round(altitude.gpsAltitudeFromLocation))}’
           small Altitude

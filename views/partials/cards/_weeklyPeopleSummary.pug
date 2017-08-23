@@ -1,0 +1,21 @@
+mixin weeklyPeopleSummary()
+  .dataCard.text-center.bar
+    .chart
+      svg#people-line-chart
+      script.
+        $(document).ready(function() {
+          createLineChart('./api/v1/people','people-line-chart', '_id', 'count');
+        });
+    .dataHeader
+      h3 People
+    .dataBody
+      .row
+        .col-xs-4
+          h3.thinner 63%
+          small Alone Time
+        .col-xs-4
+          h3.thinner John
+          small Most Common Companion
+        .col-xs-4
+          h3.thinner Doe
+          small Most Unique Companion    

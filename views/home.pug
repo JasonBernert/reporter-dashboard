@@ -1,5 +1,9 @@
 extends layout
 
+include partials/cards/_weeklyStepsSummary
+include partials/cards/_weeklyPeopleSummary
+include partials/cards/_weeklyCoffeeSummary
+
 block content
   .cover
     .container
@@ -12,23 +16,8 @@ block content
     .container
       .row
         .col-sm-6
-          .dataCard.text-center.bar
-            .chart
-              svg#steps-line-chart
-              script.
-                $(document).ready(function() {
-                  createLineChart('./api/v1/steps','steps-line-chart', 'date', 'steps' );
-                });
-            .dataHeader
-              h3 Steps
+          +weeklyStepSummary()
         .col-sm-6
-          .dataCard.text-center.bar
-            .chart
-              svg#people-line-chart
-              script.
-                $(document).ready(function() {
-                  createLineChart('./api/v1/people','people-line-chart', '_id', 'count');
-                });
-            .dataHeader
-              h3 People              
-      
+          +weeklyPeopleSummary()
+        .col-sm-6
+          +weeklyCoffeeSummary()      
