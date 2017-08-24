@@ -11,10 +11,16 @@ mongoose.Promise = global.Promise;
 const dbx = new Dropbox({ accessToken: process.env.DROPBOX_TOKEN });
 const Snapshot = require('../models/Snapshot');
 
-async function loadData(snapshots) {
+async function loadData(snapshots, mostRecent) {
   try {
-    console.log(`Uploading ${snapshots.length} new snapshots...`);
-    await Snapshot.insertMany(snapshots);
+    console.log('Uploading new snapshots...');
+    const newSnapshots = [];
+    snapshots.forEach((snapshot) => {
+      if (moment(snapshot.date).isAfter(mostRecent)) {
+        newSnapshots.push(snapshot);
+      }
+    });
+    await Snapshot.insertMany(newSnapshots);
     console.log('Uploading data complete!');
     process.exit();
   } catch (e) {
@@ -41,21 +47,18 @@ async function getData(sharedLinks) {
 
 async function getDropboxList(mostRecent) {
   try {
+    const recentFile = moment(mostRecent).format('YYYY-MM-DD');
     const response = await dbx.filesListFolder({ path: '/apps/reporter-app' });
     const entries = response.entries.sort((a, b) => new Date(b.name.split('-reporter')[0]) - new Date(a.name.split('-reporter')[0]));
 
     const paths = [];
     entries.forEach((entry) => {
       const fileDate = entry.name.split('-reporter')[0];
-      if (moment(fileDate).isAfter(mostRecent)) {
+      if (moment(fileDate).isSameOrAfter(recentFile)) {
         paths.push(entry.path_lower);
       }
     });
-    if (paths.length === 0) {
-      console.log('Your data is up to date!');
-      process.exit();
-    }
-    console.log(`There are ${paths.length} new files.`);
+    console.log(`Checking ${paths.length} files for new snapshots.`);
     return paths;
   } catch (e) {
     console.log(e);
@@ -70,9 +73,9 @@ async function findNewestSnapshot() {
       .sort({ date: -1 })
       .limit(1);
     // TODO: If there are no documents in the DB, default to oldest possible date.
-    const mostRecent = mostRecentSnap[0].date.toISOString().split('T')[0];
-    console.log(`The latest snapshot in your database is from ${mostRecent}`);
-    return mostRecent;
+    const mostRecentFormated = moment(mostRecentSnap[0].date).format('LLL');
+    console.log(`\nThe latest snapshot in your database is from ${mostRecentFormated}.`);
+    return mostRecentSnap[0].date;
   } catch (e) {
     console.log(e);
     process.exit();
@@ -88,7 +91,7 @@ async function update() {
     sharedLinks.push(sharedLink);
   }));
   const snapshots = await getData(sharedLinks);
-  await loadData(snapshots);
+  await loadData(snapshots, mostRecent);
   process.exit();
 }
 

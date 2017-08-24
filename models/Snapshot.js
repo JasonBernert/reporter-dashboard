@@ -142,15 +142,16 @@ snapshotSchema.statics.dailySummary = function () {
     { $group: {
       _id: '$sectionIdentifier',
       count: { $sum: 1 },
-      time: { $push: { year: { $year: '$date' }, month: { $month: '$date' }, day: { $dayOfMonth: '$date' } } },
+      // time: { $push: { year: { $year: '$date' }, month: { $month: '$date' }, day: { $dayOfMonth: '$date' } } },
       snapshots: { $push: { _id: '$_id', date: '$date', responses: '$responses' } }
     } },
     { $project: {
       snapshots: '$snapshots',
+      // time: '$time',
       count: 1,
       _id: 1
     } },
-    { $sort: { 'time.year': -1, 'time.month': -1, 'time.day': -1, 'snapshots.date': -1 } }
+    { $sort: { 'snapshots.date': -1 } }
   ]);
 };
 
