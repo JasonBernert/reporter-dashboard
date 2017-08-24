@@ -5,13 +5,17 @@ function BarChart() {
   let height;
   const xScale = d3.scaleBand().padding(0.5);
   const yScale = d3.scaleLinear();
-  const margin = { top: 15, bottom: 20, left: 20, right: 10 };
+  const margin = { top: 15, bottom: 20, left: 10, right: 10 };
 
   function my(selection) {
     selection.each(function (data) {
       const svg = d3.select(this)
         .attr('width', width)
         .attr('height', height);
+
+      const addCommas = d3.format(",");
+      const maxLabelLength = addCommas(d3.max(data, d => d[y])).toString().length;
+      margin.left += maxLabelLength * 7;
 
       let g = svg.selectAll('g').data([1]);
       g = g.enter().append('g').merge(g)
@@ -21,8 +25,10 @@ function BarChart() {
       const innerHeight = height - margin.top - margin.bottom;
 
       xScale.domain(data.map(d => d[x])).range([0, innerWidth]);
-      // yScale.domain([0, d3.max(data, d => d[y])]).rangeRound([innerHeight, 0]);
       yScale.domain([0, d3.max(data, d => d[y])]).range([innerHeight, 0]);
+
+      const dateRange = data.map(d => d[x]);
+      const tickFormat = dateRange[dateRange.length - 1] - dateRange[0] < 43200000 ? '%H:%M' : '%a';
 
       g.append('g')
         .attr('class', 'axis axis--x')
@@ -30,15 +36,12 @@ function BarChart() {
         .call(d3.axisBottom(xScale)
                 .ticks(6)
                 .tickSizeOuter(0)
-                .tickFormat(d3.timeFormat('%a'))
-              );
+                .tickFormat(d3.timeFormat(tickFormat))
+             );
 
       g.append('g')
         .attr('class', 'axis axis--y')
-        .call(d3.axisLeft(yScale)
-                .tickSizeInner(-innerWidth)
-                .ticks(3)
-              );
+        .call(d3.axisLeft(yScale).tickSizeInner(-innerWidth).ticks(3));
 
       g.selectAll('.bar')
         .data(data)

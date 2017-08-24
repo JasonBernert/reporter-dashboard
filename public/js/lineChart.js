@@ -5,13 +5,17 @@ function LineChart() {
   let height;
   const xScale = d3.scaleTime();
   const yScale = d3.scaleLinear();
-  const margin = { top: 10, bottom: 20, left: 40, right: 10 };
+  const margin = { top: 10, bottom: 20, left: 10, right: 10 };
 
   function my(selection) {
     selection.each(function (data) {
       const svg = d3.select(this)
         .attr('width', width)
         .attr('height', height);
+
+      const addCommas = d3.format(",");
+      const maxLabelLength = addCommas(d3.max(data, d => d[y])).toString().length;
+      margin.left += maxLabelLength * 7;
 
       const area = d3.area()
                      .curve(d3.curveStepAfter)

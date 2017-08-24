@@ -7,7 +7,7 @@
     "url": "https://github.com/jasonbernert/reporter-dashboard.git"
   },
   "author": "Jason Bernert",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "scripts": {
     "start": "nodemon app.js",
     "file-import": "node ./data/load-data",
