@@ -3,13 +3,13 @@ if messages.errors
     button.close(type='button', data-dismiss='alert')
       i.fa.fa-times
     for error in messages.errors
-      div= error
+      div= error.msg
 if messages.info
   .alert.alert-info.fade.in
     button.close(type='button', data-dismiss='alert')
       i.fa.fa-times
     for info in messages.info
-      div= info
+      div= info.msg
 if messages.success
   .alert.alert-success.fade.in
     button.close(type='button', data-dismiss='alert')

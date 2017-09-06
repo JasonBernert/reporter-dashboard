@@ -13,15 +13,20 @@ const Snapshot = require('../models/Snapshot');
 
 async function loadData(snapshots, mostRecent) {
   try {
-    console.log('Uploading new snapshots...');
+    console.log('Checking files for new snapshots...');
     const newSnapshots = [];
     snapshots.forEach((snapshot) => {
       if (moment(snapshot.date).isAfter(mostRecent)) {
         newSnapshots.push(snapshot);
       }
     });
+    if (newSnapshots.length === 0) {
+      console.log('No new snapshots.');
+      process.exit();
+    }
+    console.log(`Uploading ${newSnapshots.length} snapshots...`);
     await Snapshot.insertMany(newSnapshots);
-    console.log('Uploading data complete!');
+    console.log('Uploading data complete!\n');
     process.exit();
   } catch (e) {
     console.log(e);
@@ -47,7 +52,7 @@ async function getData(sharedLinks) {
 
 async function getDropboxList(mostRecent) {
   try {
-    const recentFile = moment(mostRecent).format('YYYY-MM-DD');
+    const recentFile = moment(mostRecent).subtract(1, 'day').format('YYYY-MM-DD');
     const response = await dbx.filesListFolder({ path: '/apps/reporter-app' });
     const entries = response.entries.sort((a, b) => new Date(b.name.split('-reporter')[0]) - new Date(a.name.split('-reporter')[0]));
 
@@ -58,7 +63,7 @@ async function getDropboxList(mostRecent) {
         paths.push(entry.path_lower);
       }
     });
-    console.log(`Checking ${paths.length} files for new snapshots.`);
+    console.log(`${paths.length} new ${paths.length === 1 ? 'file' : 'files'} in dropbox.`);
     return paths;
   } catch (e) {
     console.log(e);
