@@ -139,17 +139,11 @@ snapshotSchema.statics.countOccurrences = function (q) {
 
 snapshotSchema.statics.dailySummary = function () {
   return this.aggregate([
+    { $sort: { date: 1 } },
     { $group: {
       _id: '$sectionIdentifier',
       count: { $sum: 1 },
-      // time: { $push: { year: { $year: '$date' }, month: { $month: '$date' }, day: { $dayOfMonth: '$date' } } },
       snapshots: { $push: { _id: '$_id', date: '$date', responses: '$responses' } }
-    } },
-    { $project: {
-      snapshots: '$snapshots',
-      // time: '$time',
-      count: 1,
-      _id: 1
     } },
     { $sort: { 'snapshots.date': -1 } }
   ]);

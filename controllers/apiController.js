@@ -49,7 +49,8 @@ exports.stepsOnDay = async (req, res) => {
 
   const dateStepSummary = await Snapshot
     .find({ sectionIdentifier })
-    .select('steps date -_id');
+    .select('steps date -_id')
+    .sort({ date: -1 });
 
   res.json(dateStepSummary);
 };
