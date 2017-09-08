@@ -77,10 +77,17 @@ async function findNewestSnapshot() {
       .find()
       .sort({ date: -1 })
       .limit(1);
-    // TODO: If there are no documents in the DB, default to oldest possible date.
-    const mostRecentFormated = moment(mostRecentSnap[0].date).format('LLL');
-    console.log(`\nThe latest snapshot in your database is from ${mostRecentFormated}.`);
-    return mostRecentSnap[0].date;
+
+    let mostRecentSnapDate;
+    if (mostRecentSnap.length > 1) {
+      mostRecentSnapDate = mostRecentSnap[0].date;
+      const mostRecentFormated = moment(mostRecentSnap[0].date).format('LLL');
+      console.log(`\nThe latest snapshot in your database is from ${mostRecentFormated}.`);
+    } else {
+      mostRecentSnapDate = new Date('2000-01-01');
+      console.log('\nNo snapshots found in database.');
+    }
+    return mostRecentSnapDate;
   } catch (e) {
     console.log(e);
     process.exit();
