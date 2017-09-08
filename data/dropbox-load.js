@@ -21,7 +21,7 @@ async function loadData(snapshots, mostRecent) {
       }
     });
     if (newSnapshots.length === 0) {
-      console.log('No new snapshots.');
+      console.log('No new snapshots. You’re up to date!\n');
       process.exit();
     }
     console.log(`Uploading ${newSnapshots.length} snapshots...`);
@@ -79,7 +79,7 @@ async function findNewestSnapshot() {
       .limit(1);
 
     let mostRecentSnapDate;
-    if (mostRecentSnap.length > 1) {
+    if (mostRecentSnap.length === 1) {
       mostRecentSnapDate = mostRecentSnap[0].date;
       const mostRecentFormated = moment(mostRecentSnap[0].date).format('LLL');
       console.log(`\nThe latest snapshot in your database is from ${mostRecentFormated}.`);
