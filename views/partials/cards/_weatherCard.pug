@@ -7,6 +7,7 @@ mixin weather(weather)
         .col-xs-6.text-right
           h3
             i.wi(class=h.weatherIcons[weather.weather] title=weather.weather)
+          small= weather.weather
     .dataBody
       .row
         .col-xs-4.text-center

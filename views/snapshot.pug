@@ -21,8 +21,9 @@ block content
       .row
         .col-sm-4
           +stepsCard(snapshot[0].steps, snapshot[0].altitude, snapshot[0].sectionIdentifier)
-        .col-sm-4
-          +weather(snapshot[0].weather)
+        if snapshot[0].weather.weather
+          .col-sm-4
+            +weather(snapshot[0].weather)
         .col-sm-4
           - const question = snapshot[0].responses.find(x => x.questionPrompt === 'Where are you?')
           +location(snapshot[0].location, question, snapshot[0].altitude)

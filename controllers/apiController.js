@@ -50,7 +50,7 @@ exports.stepsOnDay = async (req, res) => {
   const dateStepSummary = await Snapshot
     .find({ sectionIdentifier })
     .select('steps date -_id')
-    .sort({ date: -1 });
+    .sort({ date: 1 });
 
   res.json(dateStepSummary);
 };
@@ -69,11 +69,12 @@ exports.excercise = async (req, res) => {
 
 exports.coffees = async (req, res) => {
   const coffees = await Snapshot
-    .aggregate([{ $unwind: '$responses' },
+    .aggregate([{ $sort: { date: -1 } },
+                { $unwind: '$responses' },
                 { $match: { 'responses.questionPrompt': 'How many coffees did you have today?' } },
                 { $project: { date: 1, coffees: '$responses.numericResponse' } },
-                { $sort: { date: 1 } },
-                { $limit: 7 }
+                { $limit: 7 },
+                { $sort: { date: 1 } }
     ]);
 
   res.json(coffees);

@@ -16,12 +16,16 @@ const expressValidator = require('express-validator');
 const expressStatusMonitor = require('express-status-monitor');
 const sassMiddleware = require('node-sass-middleware');
 const helpers = require('./helpers');
+const charts = require('./data/viz/charts');
+
+// import all of our models
+require('./models/Snapshot');
+require('./models/User');
+
+const routes = require('./routes/index');
 
 /* Load environment variables from .env file*/
 dotenv.load({ path: 'variables.env' });
-
-/* Passport configuration  */
-const passportConfig = require('./config/passport');
 
 /* Create Express server. */
 const app = express();
@@ -34,15 +38,6 @@ mongoose.connection.on('error', (err) => {
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
 });
-
-// import all of our models
-require('./models/Snapshot');
-require('./models/User');
-
-/* Controllers (route handlers).*/
-const homeController = require('./controllers/homeController');
-const userController = require('./controllers/userController');
-const apiController = require('./controllers/apiController');
 
 /* Express configuration. */
 app.set('port', process.env.PORT || 3000);
@@ -86,6 +81,7 @@ app.use(lusca.xssProtection(true));
 app.use((req, res, next) => {
   res.locals.user = req.user;
   res.locals.h = helpers;
+  res.locals.charts = charts;
   next();
 });
 app.use((req, res, next) => {
@@ -105,24 +101,7 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 
 /* Primary app routes. */
-app.get('/', passportConfig.isAuthenticated, homeController.index);
-app.get('/recent', passportConfig.isAuthenticated, homeController.recent);
-app.get('/recent/page/:page', passportConfig.isAuthenticated, homeController.recent);
-app.get('/snapshot/:id', passportConfig.isAuthenticated, homeController.snapshotDetails);
-
-app.get('/api/v1/past/:limit', apiController.getLastFew);
-app.get('/api/v1/people', apiController.getPeoples);
-app.get('/api/v1/steps', apiController.steps);
-app.get('/api/v1/steps/:sectionIdentifier', apiController.stepsOnDay);
-app.get('/api/v1/excercise', apiController.excercise);
-app.get('/api/v1/anAverageDay', apiController.anAverageDay);
-app.get('/api/v1/coffees', apiController.coffees);
-
-app.get('/login', userController.getLogin);
-app.post('/login', userController.postLogin);
-app.get('/logout', userController.logout);
-app.get('/signup', passportConfig.isAuthenticated, userController.getSignup);
-app.post('/signup', userController.postSignup);
+app.use('/', routes);
 
 /* Error Handler */
 app.use(errorHandler());
