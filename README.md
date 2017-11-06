@@ -1,13 +1,9 @@
-# IN PRODUCTION
-
-Sorry. Not quite ready yet...
-
 # Reporter Dashboard
 
-Reporter Dashboard brings all your data from the [Reporter App](http://www.reporter-app.com/) to the browser. The Reporter Dashboard ingests your data from either a Reporter App export or directly from Dropbox to mongoDB using the current [schema](https://gist.github.com/dbreunig/9315705). The API endpoints deliver basic things like a summary of the data, a month summary of your wake up, sleep, and daily data. From here the data is visualized with [D3](https://d3js.org/) on your dashboard. Customize the dashboard with your data to create new endpoints and new visualizations!
+Reporter Dashboard brings all your data from the [Reporter App](http://www.reporter-app.com/) to the browser. The Reporter Dashboard ingests your data from either a Reporter App export or directly from Dropbox to mongoDB using the current [schema](https://gist.github.com/dbreunig/9315705). The API endpoints deliver basic things like a summary of the data, your coffee intake, daily steps, and more! Data is visualized with [D3](https://d3js.org/) on your home dashboard. Customize the dashboard with your data to create new endpoints and new visualizations!
 
 #### Always Up To Date: Reporter App → Dropbox → MongoDB
-If you upload your data to dropbox, you can use `dropbox-load.js` to import all existing data into the database or run the script on your server to always keep your dashboard up to date. First, you will need a `DROPBOX_TOKEN`. Find how to get all the needed environment variables [below](#environment-variables).
+If you upload your data to dropbox, you can use `npm run dropbox-import` to import all existing data into the database or run the script on your server to always keep your dashboard up to date. First, you will need a `DROPBOX_TOKEN`. Find how to get all the needed environment variables [below](#environment-variables).
 
 #### Private
 User permissions stop anyone from seeing your personal data without, well, your permission. Reporter Dashboard requires a login to see anything from the app. Accounts can only be made by those with logins.
@@ -20,6 +16,8 @@ User permissions stop anyone from seeing your personal data without, well, your 
 4. [Add environment variables](#environment-variables)
 5. [Import data](#importing-data)
 6. `npm start`
+
+Reporter Dashboard was built with Node v7.10.0.
 
 ### Setting Up The Database
 
@@ -57,6 +55,8 @@ Data can be imported via dropbox or a JSON export from Reporter. First make sure
 
 You can also delete your snapshot data with `npm run delete-data` in case you need to start fresh.
 
-## Other
-This project is used [hackathon-starter](https://github.com/sahat/hackathon-starter), a boilerplate for Node.js web applications.
-[Weather icons](https://erikflowers.github.io/weather-icons/) created by Erik Flowers. v1.0 artwork by Lukas Bischoff. v1.1 - 2.0 artwork by Erik Flowers.
+## Acknowledgments
+- Shout out to [Nicholas Felton](http://feltron.com/) and [Drew Breunig](http://drewb.org/) for [Reporter App](http://www.reporter-app.com/).
+- This project used [hackathon-starter](https://github.com/sahat/hackathon-starter), a boilerplate for Node.js web applications.
+- [Weather icons](https://erikflowers.github.io/weather-icons/) created by Erik Flowers. v1.0 artwork by Lukas Bischoff. v1.1 - 2.0 artwork by Erik Flowers.
+- [The Noun Project](https://thenounproject.com/) for non-weather icons.
