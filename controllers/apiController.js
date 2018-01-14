@@ -55,18 +55,6 @@ exports.stepsOnDay = async (req, res) => {
   res.json(dateStepSummary);
 };
 
-exports.excercise = async (req, res) => {
-  const lastExcercised = await Snapshot
-    .aggregate([{ $unwind: '$responses' },
-               { $match: { 'responses.questionPrompt': 'Did you exercise?' } },
-               { $project: { 'responses.answeredOptions': 1, date: 1 } },
-               { $sort: { date: -1 } },
-               { $limit: 7 }
-    ]);
-
-  res.json(lastExcercised);
-};
-
 exports.coffees = async (req, res) => {
   const coffees = await Snapshot
     .aggregate([{ $sort: { date: -1 } },

@@ -15,7 +15,6 @@ router.get('/api/v1/past/:limit', apiController.getLastFew);
 router.get('/api/v1/people', apiController.getPeoples);
 router.get('/api/v1/steps', apiController.steps);
 router.get('/api/v1/steps/:sectionIdentifier', apiController.stepsOnDay);
-router.get('/api/v1/excercise', apiController.excercise);
 router.get('/api/v1/anAverageDay', apiController.anAverageDay);
 router.get('/api/v1/coffees', apiController.coffees);
 

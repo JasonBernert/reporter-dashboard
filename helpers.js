@@ -47,20 +47,6 @@ exports.createSummary = (responses) => {
     if (response.questionPrompt === 'How did you sleep?') {
       summary += `I slept ${response.answeredOptions[0].toLowerCase()}. `;
     }
-    if (response.questionPrompt === 'Do you remember your dreams?') {
-      if (response.answeredOptions[0] === 'No') {
-        summary += 'I couldn’t remembered my dreams. ';
-      } else {
-        summary += 'I remembered my dreams. ';
-      }
-    }
-    if (response.questionPrompt === 'Did you snooze?') {
-      if (response.answeredOptions[0] === 'No') {
-        summary += 'I got up right away. ';
-      } else {
-        summary += 'I snoozed. ';
-      }
-    }
     if (response.questionPrompt === 'What are you doing?') {
       if (response.tokens) {
         const activities = response.tokens;
@@ -108,25 +94,6 @@ exports.createSummary = (responses) => {
       } else {
         const coffees = response.numericResponse > 1 ? 'coffees' : 'coffee';
         summary += `I had ${numToWord(response.numericResponse)} ${coffees} today. `;
-      }
-    }
-    if (response.questionPrompt === 'Did you exercise?') {
-      if (response.answeredOptions[0] === 'Yes') {
-        summary += 'I exercised! ';
-      } else if (response.answeredOptions[0] === 'No') {
-        summary += 'I didn’t exercise. ';
-      }
-    }
-    if (response.questionPrompt === 'How are you feeling?') {
-      if (response.tokens) {
-        const feelings = response.tokens;
-        if (feelings.length > 0) {
-          const feelingsArray = [];
-          feelings.forEach((feeling) => {
-            feelingsArray.push(feeling.text.toLowerCase());
-          });
-          summary += `I was feeling ${arrayToSentance(feelingsArray)}. `;
-        }
       }
     }
     if (response.questionPrompt === 'Are you working?') {

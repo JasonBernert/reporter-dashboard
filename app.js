@@ -24,7 +24,7 @@ require('./models/User');
 
 const routes = require('./routes/index');
 
-/* Load environment variables from .env file*/
+/* Load environment variables from .env file */
 dotenv.load({ path: 'variables.env' });
 
 /* Create Express server. */
