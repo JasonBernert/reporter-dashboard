@@ -2,9 +2,9 @@ mixin sleepSummary(sleepingAverage)
   .dataCard
     .dataBody
       if sleepingAverage[0].rate === sleepingAverage[1].rate
-        h1.thinner You slept between #{sleepingAverage[0]._id.toLowerCase()} and #{sleepingAverage[1]._id.toLowerCase()} this last week.
+        h1.thinner You slept between #{sleepingAverage[0]._id.toLowerCase()} and #{sleepingAverage[1]._id.toLowerCase()} these last two weeks.
       else
-        h1.thinner You slept mostly #{sleepingAverage[0]._id.toLowerCase()} this last week.
+        h1.thinner You slept mostly #{sleepingAverage[0]._id.toLowerCase()} these last two weeks.
       hr
       each sleep in sleepingAverage
         if sleep.rate != 0

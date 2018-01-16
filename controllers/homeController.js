@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const request = require('request');
 
 const Snapshot = mongoose.model('Snapshot');
 
@@ -26,10 +27,10 @@ exports.index = async (req, res) => {
     .aggregate([{ $sort: { date: -1 } },
                 { $unwind: '$responses' },
                 { $match: { 'responses.questionPrompt': 'How did you sleep?' } },
-                { $limit: 7 },
+                { $limit: 14 },
                 { $unwind: '$responses.answeredOptions' },
                 { $sortByCount: '$responses.answeredOptions' },
-                { $project: { _id: 1, sleep: '$count', rate: { $divide: ['$count', 7] } } },
+                { $project: { _id: 1, sleep: '$count', rate: { $divide: ['$count', 14] } } },
                 { $sort: { rate: -1 } },
     ]);
 

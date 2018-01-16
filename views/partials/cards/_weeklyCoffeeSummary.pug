@@ -1,12 +1,13 @@
 mixin weeklyCoffeeSummary()
   .dataCard.text-center
-    .bar.chart #{charts.test()}
-      //- svg#coffee-bar-chart
-      //- - charts.test()
-      //- script.
-      //-   $(document).ready(function() {
-      //-     createBarChart('./api/v1/coffees','coffee-bar-chart', 'date', 'coffees' );
-      //-   });
+    .bar.chart 
+      //- #{charts.test()}
+      svg#coffee-bar-chart
+      - charts.test()
+      script.
+        $(document).ready(function() {
+          createBarChart('./api/v1/coffees','coffee-bar-chart', 'date', 'coffees' );
+        });
     .dataHeader
       h3 Coffee Consumption
     .dataBody

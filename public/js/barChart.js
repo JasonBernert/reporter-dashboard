@@ -14,6 +14,7 @@ function BarChart() {
         .attr('height', height);
 
       const addCommas = d3.format(",");
+      const yMaxValue = addCommas(d3.max(data, d => d[y]));
       const maxLabelLength = addCommas(d3.max(data, d => d[y])).toString().length;
       margin.left += maxLabelLength * 7;
 
@@ -28,8 +29,8 @@ function BarChart() {
       yScale.domain([0, d3.max(data, d => d[y])]).range([innerHeight, 0]);
 
       const dateRange = data.map(d => d[x]);
-      // 64800000 = a day and a half in  milliseconds
-      const tickFormat = dateRange[dateRange.length - 1] - dateRange[0] < 64800000 ? '%H:%M' : '%a';
+      // 129600000 = a day and a half in  milliseconds
+      const tickFormat = dateRange[dateRange.length - 1] - dateRange[0] < 129600000 ? '%H:%M' : '%a';
 
       g.append('g')
         .attr('class', 'axis axis--x')
@@ -42,7 +43,10 @@ function BarChart() {
 
       g.append('g')
         .attr('class', 'axis axis--y')
-        .call(d3.axisLeft(yScale).tickSizeInner(-innerWidth).ticks(3));
+        .call(d3.axisLeft(yScale)
+                .tickSizeInner(-innerWidth)
+                .ticks(yMaxValue < 3 ? 2 : 6)
+              );
 
       g.selectAll('.bar')
         .data(data)
