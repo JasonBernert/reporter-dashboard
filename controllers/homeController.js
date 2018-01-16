@@ -20,9 +20,23 @@ exports.index = async (req, res) => {
     count,
   };
 
+  // const sleepCycles = await Snapshot.find({ 'responses.questionPrompt': 'How did you sleep?' }).count();
+
+  const sleepSummary = await Snapshot
+    .aggregate([{ $sort: { date: -1 } },
+                { $unwind: '$responses' },
+                { $match: { 'responses.questionPrompt': 'How did you sleep?' } },
+                { $limit: 7 },
+                { $unwind: '$responses.answeredOptions' },
+                { $sortByCount: '$responses.answeredOptions' },
+                { $project: { _id: 1, sleep: '$count', rate: { $divide: ['$count', 7] } } },
+                { $sort: { rate: -1 } },
+    ]);
+
   res.render('home', {
     title: 'Reporter Dashboard',
-    summary
+    summary,
+    sleepSummary
   });
 };
 

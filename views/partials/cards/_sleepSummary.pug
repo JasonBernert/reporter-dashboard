@@ -1,0 +1,18 @@
+mixin sleepSummary(sleepingAverage)
+  .dataCard
+    .dataBody
+      if sleepingAverage[0].rate === sleepingAverage[1].rate
+        h1.thinner You slept between #{sleepingAverage[0]._id.toLowerCase()} and #{sleepingAverage[1]._id.toLowerCase()} this last week.
+      else
+        h1.thinner You slept mostly #{sleepingAverage[0]._id.toLowerCase()} this last week.
+      hr
+      each sleep in sleepingAverage
+        if sleep.rate != 0
+          .row
+            .col-xs-3= sleep._id
+            .col-xs-9
+              if sleep.rate > 0.1
+                .css-bar(style=`width: ${sleep.rate * 100}%`) #{Math.round(sleep.rate * 100)}%
+              else
+                .css-bar.pull-left(style=`width: ${sleep.rate * 100}%`)
+                .end-number #{Math.round(sleep.rate * 100)}%
